@@ -10,13 +10,93 @@
 
 <body>
 
+    <header>
+
+        <nav>
+            <div class="logo">
+                <a href="index.html"><img id="header-logo" src="images/GE_Logo-inline-on-white.png"
+                        alt="Gelos Enterprises logo"></a>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a class="active" href="tasks.html">Tasks</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="header-lines">
+            <!-- <div class="line line-one"></div> -->
+            <div class="line line-one"></div>
+            <div class="line line-two"></div>
+        </div>
+    </header>
+
+
+
+    <main class="tasks-main">
 
 
 
 
 
 
-    <script src="js/script.js"></script>
+
+
+        <h2>Create New Task</h2>
+
+        <form action="">
+
+            <label for="fname">Task Name:</label>
+            <input type="text" id="taskName" name="taskName" placeholder="Please type Task Name here"><br>
+
+            <br><br>
+
+            <label for="due-date">Due Date:</label>
+            <input type="date" id="due-date" name="due-date">
+            <input type="submit">
+
+            <br><br><br>
+
+
+            <label for="priority">Select priority level:</label>
+            <select id="priority" name="priority">
+                <option value="volvo">High</option>
+                <option value="saab">Medium</option>
+                <option value="fiat">Low</option>
+            </select>
+            <input type="submit">
+
+            <br><br>
+            <input type="submit" value="Create Task">
+
+        </form>
+
+</body>
+
+</html>
+
+
+
+
+
+</main>
+
+
+
+<footer>
+    <div class="footer-lines">
+        <div class="line line-two"></div>
+        <div class="line line-one"></div>
+    </div>
+    <div class="external-links">
+        <a class="external-link" href="#">Privacy Policy</a>
+        <a class="external-link" href="#">Internet Usage Policy</a>
+    </div>
+</footer>
+
+
+
+
+<script src="js/script.js"></script>
 
 </body>
 
