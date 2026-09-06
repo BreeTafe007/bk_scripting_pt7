@@ -1,3 +1,63 @@
+
+// Function for inserting VALUE into ARRAY at INDEX
+function insertFunction(array, index, value) {
+    for (let i = array.length; i > index; i--)
+        array[i] = array[i - 1];
+    array[index] = value;
+}
+
+// Function for deleting value at INDEX of ARRAY
+function deleteFunction(array, index) {
+    for (i = index; i < array.length - 1; i++)
+        array[i] = array[i + 1];
+    array.length--;
+}
+
+// Function for sequentially searching ARRAY using QUERY condition
+function sequentialSearchFunction(array, query) {
+    for (i = 0; i < array.length; i++)
+        if (array[i] === query)
+            return query
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 let roles = [
     {
         name: "Alice Johnson",

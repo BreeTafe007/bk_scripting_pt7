@@ -38,6 +38,19 @@ body {
 
 .index-main {
     flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.index-instructions {
+    padding: 10px;
+}
+
+
+
+
+.welcome-img {
+    width: 100%;
 }
 
 .tasks-main {
