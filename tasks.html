@@ -70,6 +70,79 @@
 
         </form>
 
+
+
+        <!-- User Input Table -->
+        <div class="activity">
+            <h3>Add New Product</h3>
+            <p>Please enter task name, due date, priorty level, and consultant assigned (optional) in the provided
+                fields.</p>
+            <div class="addProductForm">
+                <!-- Task Name -->
+                <input id="inputTaskName" type="text" placeholder="Task name">
+                <!-- Task Due Date -->
+                <input id="inputDueDate" type="date">
+                <!-- Task Priority Level -->
+                <select id="inputPriority" name="priority">
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+                <!-- Task Consultant -->
+                <select id="inputConstultant" name="constultant">
+                    <option value="consultant 1">Consultant 1</option>
+                    <option value="consultant 2">Consultant 2</option>
+                    <option value="consultant 3">Consultant 3</option>
+                </select>
+                <!-- Create Task Button -->
+                <button class="btn-add" id="btnAddTask">Create Task</button>
+            </div>
+        </div>
+
+
+
+
+        <!-- Task List Table -->
+        <h3>Task List</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Task Name</th>
+                    <th>Due Date</th>
+                    <th>Priority Level</th>
+                    <th>Consultant</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody id="taskListTableBody">
+
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 
 </html>

@@ -36,6 +36,29 @@ body {
 }
 
 
+
+
+
+
+
+
+.activity {
+    background-color: whitesmoke;
+    border-left: 6px solid var(--secondary-color-light);
+    padding: 18px;
+    margin: 20px 0;
+}
+
+
+
+
+
+
+
+
+
+
+
 .index-main {
     flex: 1;
     display: grid;
