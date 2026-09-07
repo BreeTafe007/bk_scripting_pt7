@@ -1,12 +1,21 @@
 
-// Function for inserting VALUE into ARRAY at INDEX
+/**
+ * Function for inserting a new task into the task list array
+ * @param {Array} array 
+ * @param {number} index 
+ * @param {string} value 
+ */
 function insertFunction(array, index, value) {
     for (let i = array.length; i > index; i--)
         array[i] = array[i - 1];
     array[index] = value;
 }
 
-// Function for deleting value at INDEX of ARRAY
+/**
+ * Function for deleting a target task at specified index within task list array
+ * @param {Array} array - the current task list array
+ * @param {number} index - index of task within the task list that you wish to delete
+ */
 function deleteFunction(array, index) {
     for (i = index; i < array.length - 1; i++)
         array[i] = array[i + 1];
@@ -15,10 +24,10 @@ function deleteFunction(array, index) {
 
 
 /**
- * fuction for sequentially searching an array
- * @param {Array} array - current array
- * @param {string} query - string query
- * @returns {number} - or -1
+ * Function for sequentially searching task list array for specified task
+ * @param {Array} array - the current task list array
+ * @param {string} query - 
+ * @returns 
  */
 function sequentialSearchFunction(array, query) {
     for (i = 0; i < array.length; i++)
@@ -29,6 +38,38 @@ function sequentialSearchFunction(array, query) {
 
 
 
+let inputTaskName = document.getElementById("inputTaskName");
+let inputDueDate = document.getElementById("inputDueDate");
+let inputPriority = document.getElementById("inputPriority");
+let inputConstultant = document.getElementById("inputConstultant");
+let btnAddTask = document.getElementById("btnAddTask");
+let taskListTableBody = document.getElementById("taskListTableBody");
+
+
+
+
+
+btnAddTask.addEventListener("click", function () {
+    let taskName = inputTaskName.value.trim();
+    let dueDate = parseFloat(inputDueDate.value);
+    let priority = parseInt(inputPriority.value);
+    let consultant = parseInt(inputConstultant.value);
+
+    if (!taskName || isNaN(dueDate) || isNaN(priority) || isNaN(consultant)) {
+        alert("Invalid input.");
+        return; // Return will exit the function: will not continue to the next process (let...)
+    }
+
+    let newTask = { name: name, dueDate: dueDate, priority: priority, consultant: consultant };
+    insertFunction(cart, 0, newTask);
+    console.log(cart);
+
+    inputTaskName.value = "";
+    // inputPrice.value = "";
+    // inputQty.value = "";
+
+    updateDisplay();
+})
 
 
 
@@ -37,20 +78,127 @@ function sequentialSearchFunction(array, query) {
 
 
 
+function updateDisplay() {
+
+    if (!taskListTableBody) return; // If taskListTableBody is NULL, do nothing
+
+    cartTableBody.innerHTML = "";
+
+    for (let i = 0; i < tasks.length; i++) {
+        let item = roles[i];
+        let tr = document.createElement("tr");
+
+
+        // Product name column
+        let tdName = document.createElement("td");
+        tdName.innerText = item.name;
+        tr.appendChild(tdName);
+
+
+        // Price column
+        let tdPrice = document.createElement("td");
+        tdPrice.innerText = item.price;
+        tr.appendChild(tdPrice);
+
+
+        // Quantity column
+        // Quantity descrease button
+        const btnDecrease = document.createElement("button");
+        btnDecrease.innerText = "-";
+        btnDecrease.className = "btn-qty";
+        btnDecrease.setAttribute("data-index", i);
+        btnDecrease.addEventListener("click", function () {
+            if (cart[i].qty > 1) {
+                cart[i].qty--;
+            }
+            else {
+                // Remove item if quantity drops to 0
+                deletionFuction(cart, i);
+            }
+            updateDisplay();
+        })
+
+        let tdQty = document.createElement("td");
+        tdQty.innerText = item.qty;
+        tr.appendChild(tdQty);
+
+
+        // Quantity increase button
+        const btnIncrease = document.createElement("button");
+        btnIncrease.innerText = "+";
+        btnDecrease.className = "btn-qty";
+        btnDecrease.setAttribute("data-index", i);
+        btnDecrease.addEventListener("click", function () {
+            cart[i].qty++;
+
+            updateDisplay();
+        })
+
+
+        // Subtotal column
+        // let tdSubtotal = document.createElement("td");
+        // tdSubtotal.innerText = item.price * item.qty;
+        // tr.appendChild(tdSubtotal);
+        const qtyText = document.createElement("span");
+        qtyText.className = "qty-text";
+        qtyText.innerText = item.qty;
+
+        tdQty.appendChild(btnDecrease);
+        tdQty.appendChild(qtyText);
+        tdQty.appendChild(btnIncrease);
+        // tr.appendChild(tdQty);
+
+
+        // Actions column
+        let tdActions = document.createElement("td");
+        let btnDelete = document.createElement("button");
+        btnDelete.innerText = "Delete";
+        btnDelete.className = "badge-delete";
+        btnDelete.setAttribute("data-index", i);
+        btnDelete.addEventListener("click", function () {
+            deleteFunction(cart, i);
+            updateDisplay();
+        })
+        tdActions.appendChild(btnDelete);
+        tr.appendChild(tdActions);
+
+
+
+        cartTableBody.appendChild(tr);
+    }
+}
 
 
 
 
 
 
-
-
-
-
-
-
-
-
+let tasks = [
+    {
+        taskName: "Write summary report",
+        dueDate: "09/09/26",
+        priority: "Medium",
+        consultant: ""
+    },
+    {
+        taskName: "Write summary report",
+        dueDate: "09/09/26",
+        priority: "Medium",
+        consultant: ""
+    },
+    {
+        taskName: "All team meeting",
+        dueDate: "09/09/26",
+        priority: "Medium",
+        consultant: ""
+    },
+    {
+        taskName: "Write summary report",
+        dueDate: "09/09/26",
+        priority: "Medium",
+        consultant: ""
+    }
+]
 
 
 
