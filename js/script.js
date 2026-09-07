@@ -22,7 +22,13 @@ function deleteFunction(array, index) {
     array.length--;
 }
 
-// Function for sequentially searching ARRAY using QUERY condition
+
+/**
+ * fuction for sequentially searching an array
+ * @param {Array} array - current array
+ * @param {string} query - string query
+ * @returns {number} - or -1
+ */
 function sequentialSearchFunction(array, query) {
     for (i = 0; i < array.length; i++)
         if (array[i] === query)
