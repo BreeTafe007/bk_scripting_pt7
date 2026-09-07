@@ -22,9 +22,8 @@ function deleteFunction(array, index) {
     array.length--;
 }
 
-
 /**
- * fuction for sequentially searching an array
+ * Fuction for sequentially searching task list array for specific task using query
  * @param {Array} array - current array
  * @param {string} query - string query
  * @returns {number} - or -1
@@ -60,9 +59,9 @@ btnAddTask.addEventListener("click", function () {
         return; // Return will exit the function: will not continue to the next process (let...)
     }
 
-    let newTask = { name: name, dueDate: dueDate, priority: priority, consultant: consultant };
-    insertFunction(cart, 0, newTask);
-    console.log(cart);
+    let newTask = { taskName: taskName, dueDate: dueDate, priority: priority, consultant: consultant };
+    insertFunction(tasks, 0, newTask);
+    console.log(tasks);
 
     inputTaskName.value = "";
     // inputPrice.value = "";
@@ -82,74 +81,38 @@ function updateDisplay() {
 
     if (!taskListTableBody) return; // If taskListTableBody is NULL, do nothing
 
-    cartTableBody.innerHTML = "";
+    taskListTableBody.innerHTML = "";
 
     for (let i = 0; i < tasks.length; i++) {
-        let item = roles[i];
+        let item = tasks[i];
         let tr = document.createElement("tr");
 
 
-        // Product name column
-        let tdName = document.createElement("td");
-        tdName.innerText = item.name;
-        tr.appendChild(tdName);
+        // Task Name Column
+        let tdtaskName = document.createElement("td");
+        tdtaskName.innerText = item.taskName;
+        tr.appendChild(tdtaskName);
 
 
-        // Price column
-        let tdPrice = document.createElement("td");
-        tdPrice.innerText = item.price;
-        tr.appendChild(tdPrice);
+        // Due Date Column
+        let tddueDate = document.createElement("td");
+        tddueDate.innerText = item.dueDate;
+        tr.appendChild(tddueDate);
 
 
-        // Quantity column
-        // Quantity descrease button
-        const btnDecrease = document.createElement("button");
-        btnDecrease.innerText = "-";
-        btnDecrease.className = "btn-qty";
-        btnDecrease.setAttribute("data-index", i);
-        btnDecrease.addEventListener("click", function () {
-            if (cart[i].qty > 1) {
-                cart[i].qty--;
-            }
-            else {
-                // Remove item if quantity drops to 0
-                deletionFuction(cart, i);
-            }
-            updateDisplay();
-        })
-
+        // Priority Column
         let tdQty = document.createElement("td");
-        tdQty.innerText = item.qty;
-        tr.appendChild(tdQty);
+        tdpriority.innerText = item.priority;
+        tr.appendChild(tdpriority);
 
 
-        // Quantity increase button
-        const btnIncrease = document.createElement("button");
-        btnIncrease.innerText = "+";
-        btnDecrease.className = "btn-qty";
-        btnDecrease.setAttribute("data-index", i);
-        btnDecrease.addEventListener("click", function () {
-            cart[i].qty++;
-
-            updateDisplay();
-        })
+        // Concultant Column
+        let tdconsultant = document.createElement("td");
+        tdconsultant.innerText = item.consultant;
+        tr.appendChild(tdconsultant);
 
 
-        // Subtotal column
-        // let tdSubtotal = document.createElement("td");
-        // tdSubtotal.innerText = item.price * item.qty;
-        // tr.appendChild(tdSubtotal);
-        const qtyText = document.createElement("span");
-        qtyText.className = "qty-text";
-        qtyText.innerText = item.qty;
-
-        tdQty.appendChild(btnDecrease);
-        tdQty.appendChild(qtyText);
-        tdQty.appendChild(btnIncrease);
-        // tr.appendChild(tdQty);
-
-
-        // Actions column
+        // Actions Column
         let tdActions = document.createElement("td");
         let btnDelete = document.createElement("button");
         btnDelete.innerText = "Delete";
@@ -181,22 +144,22 @@ let tasks = [
         consultant: ""
     },
     {
-        taskName: "Write summary report",
-        dueDate: "09/09/26",
-        priority: "Medium",
-        consultant: ""
+        taskName: "Meet with x client",
+        dueDate: "19/09/26",
+        priority: "High",
+        consultant: "Jamie Jones"
     },
     {
         taskName: "All team meeting",
-        dueDate: "09/09/26",
+        dueDate: "08/10/26",
         priority: "Medium",
-        consultant: ""
+        consultant: "Alicia Reddington"
     },
     {
-        taskName: "Write summary report",
-        dueDate: "09/09/26",
-        priority: "Medium",
-        consultant: ""
+        taskName: "Create project timeline",
+        dueDate: "10/10/26",
+        priority: "Low",
+        consultant: "Harry Locke"
     }
 ]
 
