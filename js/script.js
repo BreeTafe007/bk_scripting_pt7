@@ -1,170 +1,206 @@
+// ==========================================
+//              ARRAY ALGORITHMS
+// ==========================================
 
-// /**
-//  * Function for inserting a new task into the task list array
-//  * @param {Array} array 
-//  * @param {number} index 
-//  * @param {string} value 
-//  */
-// function insertFunction(array, index, value) {
-//     for (let i = array.length; i > index; i--)
-//         array[i] = array[i - 1];
-//     array[index] = value;
-// }
+/**
+ * Function for inserting a new task into the task list array
+ * @param {Array} array - task list array
+ * @param {number} index - index within task list array at which new task is to be inserted
+ * @param {string} value - string of new task to be added to task list array
+ */
+function insertFunction(array, index, value) {
+    for (let i = array.length; i > index; i--)
+        array[i] = array[i - 1];
+    array[index] = value;
+}
 
-// /**
-//  * Function for deleting a target task at specified index within task list array
-//  * @param {Array} array - the current task list array
-//  * @param {number} index - index of task within the task list that you wish to delete
-//  */
-// function deleteFunction(array, index) {
-//     for (i = index; i < array.length - 1; i++)
-//         array[i] = array[i + 1];
-//     array.length--;
-// }
+/**
+ * Function for deleting a target task at specified index within task list array
+ * @param {Array} array - the current task list array
+ * @param {number} index - index of task within the task list that you wish to delete
+ */
+function deleteFunction(array, index) {
+    for (let i = index; i < array.length - 1; i++)
+        array[i] = array[i + 1];
+    array.length--;
+}
 
-// /**
-//  * Fuction for sequentially searching task list array for specific task using query
-//  * @param {Array} array - current array
-//  * @param {string} query - string query
-//  * @returns {number} - or -1
-//  */
-// function sequentialSearchFunction(array, query) {
-//     for (i = 0; i < array.length; i++)
-//         if (array[i] === query)
-//             return query
-// }
+/**
+ * Fuction for sequentially searching task list array for specific task using query
+ * @param {Array} array - the current task list array
+ * @param {string} query - string query being searched for within task list array
+ * @returns {string} - query that was successfully located within array or -1 if not found
+ */
+function sequentialSearchFunction(array, query) {
+    for (let i = 0; i < array.length; i++)
+        if (array[i] === query)
+            return query
+}
+
+/**
+ * Fuction for sequentially searching task list array for specific task using taskName, dueDate, priority, or consultant
+ * @param {Array} array - the current task list array
+ * @param {string} query - string query being searched for within task list array
+ * @returns {number} - index position within array of query value or -1 if not found
+ */
+function sequentialTaskSearch(array, query) {
+    let matches = [];
+
+    for (let i = 0; i < array.length; i++) {
+        if (
+            array[i].taskName === query ||
+            array[i].dueDate === query ||
+            array[i].priority === query ||
+            array[i].consultant === query
+        ) {
+            matches.push(i);
+        }
+    }
+    return matches;
+}
+
+/**
+ * Function to perform binary search on sorted roles array to find the role and retrieve the matching consultant
+ * @param {Array} arr - use sorted array of roles
+ * @param {string} target - role of consultant being searched for
+ * @returns {string} - name of consultant (or "Consultant not found")
+ */
+function getConsultant(arr, target) {
+    if (target === "") return "Consultant not found.";
+
+    let left = 0;
+    // Create variable to represent the right-most element in the array called RIGHT (equal to length of array - 1)
+    let right = arr.length - 1;
+
+    while (left <= right) {
+        // Create variable to represent the middle-most element in the array called MID (equal to average of LEFT and RIGHT ((LEFT+RIGHT)/2)
+        const mid = Math.floor((left + right) / 2);
+        const role = arr[mid].role;
+
+        if (role === target) {
+            return arr[mid].name;
+        }
+
+        if (role < target) {
+            left = mid + 1;
+        }
+        else {
+            right = mid - 1;
+        }
+    }
+    return "Consultant not found.";
+}
+
+/**
+ * Function to sort consultants in roles array into alphabetical order based on the first letter of their role
+ * @param {Array} arr - the current roles array to be sorted
+ * @returns {Array} - new roles array now sorted into alphabetical order (based on role)
+ */
+function sortAscending(arr) {
+    return arr.slice().sort(function (a, b) { return a.role.localeCompare(b.role) })
+}
+
+/**
+ * Function for updating content of Task List Table (taskListTableBody)
+ * @returns {void} - updates content of Task List Table (taskListTableBody)
+ */
+function updateDisplay(matches = null) {
+
+    if (!taskListTableBody) return; // If taskListTableBody is NULL, do nothing
+
+    taskListTableBody.innerHTML = "";
+
+    for (let i = 0; i < tasks.length; i++) {
+
+        if (matches !== null) {
+            let found = false;
+
+            for (let j = 0; j < matches.length; j++) {
+                if (matches[j] === i) {
+                    found = true;
+                }
+            }
+
+            if (!found) {
+                continue;
+            }
+        }
+
+        let task = tasks[i];
+
+        let tr = document.createElement("tr");
+
+        // Task Name Column
+        let tdtaskName = document.createElement("td");
+        tdtaskName.innerText = task.taskName;
+        tr.appendChild(tdtaskName);
+
+        // Due Date Column
+        let tddueDate = document.createElement("td");
+        tddueDate.innerText = task.dueDate;
+        tr.appendChild(tddueDate);
+
+        // Priority Column
+        let tdpriority = document.createElement("td");
+        tdpriority.innerText = task.priority;
+        tr.appendChild(tdpriority);
+
+        // Concultant Column
+        let tdconsultant = document.createElement("td");
+        tdconsultant.innerText = task.consultant;
+        tr.appendChild(tdconsultant);
+
+        // Actions Column
+        let tdActions = document.createElement("td");
+        // Delete button
+        let btnDelete = document.createElement("button");
+        btnDelete.innerText = "Delete";
+        btnDelete.className = "badge-delete";
+        btnDelete.setAttribute("data-index", i);
+        btnDelete.addEventListener("click", function () {
+            if (confirm("Are you sure you want to delete this task?")) // https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_confirm
+            {
+                deleteFunction(tasks, i);
+                updateDisplay();
+            }
+        })
+        tdActions.appendChild(btnDelete);
+        // Complete button
+        let btnComplete = document.createElement("button");
+        btnComplete.innerText = "Complete";
+        btnComplete.className = "badge-complete";
+        btnComplete.setAttribute("data-index", i);
+        btnComplete.addEventListener("click", function () {
+            if (confirm("Are you sure you want to complete this task?"))
+                tr.classList.add("completed-task");
+        })
+        tdActions.appendChild(btnComplete);
+        tr.appendChild(tdActions);
+        taskListTableBody.appendChild(tr);
+    }
+}
 
 
+// ==========================================
+//             DECLARE VARIABLES
+// ==========================================
+
+let inputTaskName = document.getElementById("inputTaskName");
+let inputDueDate = document.getElementById("inputDueDate");
+let inputPriority = document.getElementById("inputPriority");
+let inputConsultant = document.getElementById("inputConsultant");
+let btnAddTask = document.getElementById("btnAddTask");
+let btnSearchTask = document.getElementById("btnSearchTask");
+let btnClearSearch = document.getElementById("btnClearSearch");
+let taskListTableBody = document.getElementById("taskListTableBody");
 
 
-// let inputTaskName = document.getElementById("inputTaskName");
-// let inputDueDate = document.getElementById("inputDueDate");
-// let inputPriority = document.getElementById("inputPriority");
-// let inputConstultant = document.getElementById("inputConstultant");
-// let btnAddTask = document.getElementById("btnAddTask");
-// let taskListTableBody = document.getElementById("taskListTableBody");
+// ==========================================
+//              DECLARE ARRAYS
+// ==========================================
 
-
-
-
-
-// btnAddTask.addEventListener("click", function () {
-//     let taskName = inputTaskName.value.trim();
-//     let dueDate = parseFloat(inputDueDate.value);
-//     let priority = parseInt(inputPriority.value);
-//     let consultant = parseInt(inputConstultant.value);
-
-//     if (!taskName || isNaN(dueDate) || isNaN(priority) || isNaN(consultant)) {
-//         alert("Invalid input.");
-//         return; // Return will exit the function: will not continue to the next process (let...)
-//     }
-
-//     let newTask = { taskName: taskName, dueDate: dueDate, priority: priority, consultant: consultant };
-//     insertFunction(tasks, 0, newTask);
-//     console.log(tasks);
-
-//     inputTaskName.value = "";
-//     // inputPrice.value = "";
-//     // inputQty.value = "";
-
-//     updateDisplay();
-// })
-
-
-
-
-
-
-
-
-// function updateDisplay() {
-
-//     if (!taskListTableBody) return; // If taskListTableBody is NULL, do nothing
-
-//     taskListTableBody.innerHTML = "";
-
-//     for (let i = 0; i < tasks.length; i++) {
-//         let item = tasks[i];
-//         let tr = document.createElement("tr");
-
-
-//         // Task Name Column
-//         let tdtaskName = document.createElement("td");
-//         tdtaskName.innerText = item.taskName;
-//         tr.appendChild(tdtaskName);
-
-
-//         // Due Date Column
-//         let tddueDate = document.createElement("td");
-//         tddueDate.innerText = item.dueDate;
-//         tr.appendChild(tddueDate);
-
-
-//         // Priority Column
-//         let tdQty = document.createElement("td");
-//         tdpriority.innerText = item.priority;
-//         tr.appendChild(tdpriority);
-
-
-//         // Concultant Column
-//         let tdconsultant = document.createElement("td");
-//         tdconsultant.innerText = item.consultant;
-//         tr.appendChild(tdconsultant);
-
-
-//         // Actions Column
-//         let tdActions = document.createElement("td");
-//         let btnDelete = document.createElement("button");
-//         btnDelete.innerText = "Delete";
-//         btnDelete.className = "badge-delete";
-//         btnDelete.setAttribute("data-index", i);
-//         btnDelete.addEventListener("click", function () {
-//             deleteFunction(cart, i);
-//             updateDisplay();
-//         })
-//         tdActions.appendChild(btnDelete);
-//         tr.appendChild(tdActions);
-
-
-
-//         cartTableBody.appendChild(tr);
-//     }
-// }
-
-
-
-
-
-
-// let tasks = [
-//     {
-//         taskName: "Write summary report",
-//         dueDate: "09/09/26",
-//         priority: "Medium",
-//         consultant: ""
-//     },
-//     {
-//         taskName: "Meet with x client",
-//         dueDate: "19/09/26",
-//         priority: "High",
-//         consultant: "Jamie Jones"
-//     },
-//     {
-//         taskName: "All team meeting",
-//         dueDate: "08/10/26",
-//         priority: "Medium",
-//         consultant: "Alicia Reddington"
-//     },
-//     {
-//         taskName: "Create project timeline",
-//         dueDate: "10/10/26",
-//         priority: "Low",
-//         consultant: "Harry Locke"
-//     }
-// ]
-
-
-let roles = [
+// Roles Array
+let unsortedRoles = [
     {
         name: "Vince Johnson",
         role: "Customer Experience Administrator"
@@ -216,55 +252,103 @@ let roles = [
 
 ]
 
-/**
- * Function to sort consultants in alphabetical order based on the first letter of their role
- * @param {Array} arr - Array you want sorted
- * @returns {Array} - sorted Array
- */
-function sortAscending(arr) {
-    return arr.slice().sort(function (a, b) { return a.role.localeCompare(b.role) })
-}
-
-console.log("Unsorted Roles:");
-console.log(roles);
-
-sortedRoles = sortAscending(roles);
-console.log("Sorted Roles:");
-console.log(sortedRoles);
-
-/**
- * Perform binary search on sorted roles array to find the role and retrieve the matching consultant
- * @param {Array} arr - use sorted array of roles
- * @param {string} target - role of consultant being searched for
- * @returns {string} - name of consultant (or "Consultant not found")
- */
-function getConsultant(arr, target) {
-    if (target === "") return "Consultant not found.";
-
-    let left = 0;
-    // Create variable to represent the right-most element in the array called RIGHT (equal to length of array - 1)
-    let right = arr.length - 1;
-
-    while (left <= right) {
-        // Create variable to represent the middle-most element in the array called MID (equal to average of LEFT and RIGHT ((LEFT+RIGHT)/2)
-        const mid = Math.floor((left + right) / 2);
-        const role = arr[mid].role;
-
-        if (role === target) {
-            return arr[mid].name;
-        }
-
-        if (role < target) {
-            left = mid + 1;
-        }
-        else {
-            right = mid - 1;
-        }
+// Task List Array
+let tasks = [
+    {
+        taskName: "Write summary report",
+        dueDate: "2026-09-09",
+        priority: "Medium",
+        consultant: ""
+    },
+    {
+        taskName: "Meet with X client",
+        dueDate: "2026-09-26",
+        priority: "High",
+        consultant: "Vince Johnson"
+    },
+    {
+        taskName: "All team meeting",
+        dueDate: "2026-10-08",
+        priority: "Medium",
+        consultant: "Rachel Johnson"
+    },
+    {
+        taskName: "Create project timeline",
+        dueDate: "2026-10-10",
+        priority: "Low",
+        consultant: "Frank Johnson"
     }
-}
-console.log("Name of the Corporate Social Responsibility Manager:");
-let consultantName = getConsultant(sortedRoles, "Corporate Social Responsibility Manager");
-console.log(consultantName);
+]
+// Populate List Task Table
+let roles = sortAscending(unsortedRoles);
+updateDisplay();
+
+
+// ==========================================
+//                CALL FUNCTIONS
+// ==========================================
+
+// Triggered when user clicks Add Task button
+btnAddTask.addEventListener("click", function () {
+    let taskName = inputTaskName.value.trim();
+    let dueDate = inputDueDate.value;
+    let priority = inputPriority.value;
+
+
+    if (!taskName || !dueDate || !priority) {
+        alert("Invalid input.");
+        return; // Return will exit the function: will not continue to the next process (let...)
+    }
+
+    let consultantRole = inputConsultant.value;
+    let consultant = "";
+
+    if (consultantRole !== "") {
+        consultant = getConsultant(roles, consultantRole);
+    };
+
+    let newTask = {
+        taskName: taskName,
+        dueDate: dueDate,
+        priority: priority,
+        consultant: consultant
+    };
+    insertFunction(tasks, 0, newTask);
+
+    // Reset default values to empty string
+    inputTaskName.value = "";
+    inputDueDate.value = "";
+    inputPriority.value = "";
+    inputConsultant.value = "";
+
+    // Update table
+    updateDisplay();
+})
+
+// Triggered when user clicks Search button
+btnSearchTask.addEventListener("click", function () {
+    let query = document.getElementById("inputSearch").value;
+
+    if (query === "") {
+        updateDisplay();
+    }
+    else {
+        let matches = sequentialTaskSearch(tasks, query);
+        updateDisplay(matches);
+    }
+})
+
+// Triggered when user clicks Clear Search button
+btnClearSearch.addEventListener("click", function () {
+    document.getElementById("inputSearch").value = "";
+    updateDisplay();
+})
+
+
+
+
+
+
 
 
 
