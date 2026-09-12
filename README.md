@@ -5,19 +5,19 @@
 - **Role**: Vocational ICT Software Student
 
 ## Project Description
-The Gelos Task Manager is a responsive single-page web application designed to help administrative staff organize, search, complete, and track operational tasks. The system features dynamic client-side array management, DOM manipulation, and local storage persistence.
+The Gelos Task Manager is a responsive single-page web application designed to help administrative staff create, search, complete, and track operational tasks. The system features dynamic client-side array management, DOM manipulation, and local storage persistence.
 
 ## Website Pages & Modules
-- **Home (`index.html`)**: Landing overview page with system status summary.
+- **Home (`index.html`)**: Landing overview page with system usage instructions.
 - **Task Manager (`task-manager.html`)**: Core application interface with real-time dynamic rendering.
 - **Contact (`contact.html`)**: Customer feedback form featuring client-side form validation.
 
 ## Key Features
-- Add new tasks with title, category, and priority assignments.
-- Real-time task searching and category filtering.
-- Complete/Incomplete status toggles.
+- Add new tasks with title, due date, consultant and priority assignments.
+- Real-time task searching/filtering.
+- Complete/Delete status toggles.
 - Dynamic array element removal (In-place array re-indexing).
-- Light / Dark theme preference toggling.
+<!-- - Light / Dark theme preference toggling. -->
 
 ## Technologies Used
 - **HTML5**: Semantic document structure and ARIA attributes.
@@ -29,7 +29,7 @@ The Gelos Task Manager is a responsive single-page web application designed to h
 /gelos-task-manager
 │
 ├── index.html
-├── task-manager.html
+├── tasks.html
 ├── contact.html
 │
 ├── css/
@@ -44,8 +44,25 @@ The Gelos Task Manager is a responsive single-page web application designed to h
 │       ├── index.html
 │       ├── global.html
 │       └── script.js.html
+│  
+├── images/
+│   ├── AdobeStock_251298381.jpeg
+│   ├── AdobeStock_324337682.jpeg
+│   ├── AdobeStock_355811661.jpeg
+│   ├── AdobeStock_359788006.jpeg
+│   ├── AdobeStock_443550502.jpeg
+│   ├── AdobeStock_456794685.jpeg
+│   ├── AdobeStock_668218525.jpeg
+│   ├── AdobeStock_1178485938.jpeg
+│   └── GE_Logo-inline-on-white.png
 │
-└── README.md
+├── external-docments/
+│   ├── GE_Internet-usage-policy.pdf
+│   └── GE_Privacy-policy.pdf
+│ 
+├── README.md
+│ 
+└── .gitignore
 
 ## Setup & Running Instructions
 1. Clone or download the repository files to your local environment.

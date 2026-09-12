@@ -190,6 +190,7 @@ let inputDueDate = document.getElementById("inputDueDate");
 let inputPriority = document.getElementById("inputPriority");
 let inputConsultant = document.getElementById("inputConsultant");
 let btnAddTask = document.getElementById("btnAddTask");
+let btnClearAddTask = document.getElementById("btnClearAddTask");
 let btnSearchTask = document.getElementById("btnSearchTask");
 let btnClearSearch = document.getElementById("btnClearSearch");
 let taskListTableBody = document.getElementById("taskListTableBody");
@@ -338,15 +339,20 @@ btnSearchTask.addEventListener("click", function () {
     }
 })
 
-// Triggered when user clicks Clear Search button
+// Triggered when user clicks Clear Search button in Search for Task section
 btnClearSearch.addEventListener("click", function () {
     document.getElementById("inputSearch").value = "";
+
     updateDisplay();
 })
 
-
-
-
+// Triggered when user clicks Clear button in Create New Task section
+btnClearAddTask.addEventListener("click", function () {
+    document.getElementById("inputTaskName").value = "";
+    document.getElementById("inputDueDate").value = "";
+    document.getElementById("inputPriority").value = "";
+    document.getElementById("inputConsultant").value = "";
+})
 
 
 

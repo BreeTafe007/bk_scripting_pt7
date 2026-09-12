@@ -34,56 +34,20 @@
 
     <main class="tasks-main">
 
-        <!-- User Input Table -->
-        <div class="activity">
-            <h3>Create New Task</h3>
-            <p>Please enter Task Name, Due Date, Priorty Level, and Consultant assigned in the provided
-                fields. Note: All fields are <b>required</b>, except for Consultant, which is optional.</p>
-            <div class="addTaskForm">
-                <!-- Task Name -->
-                <input id="inputTaskName" type="text" placeholder="Task name" required>
-                <!-- Task Due Date -->
-                <input id="inputDueDate" type="date" required>
-                <!-- Task Priority Level -->
-                <select id="inputPriority" name="priority" required>
-                    <option value="" selected hidden>Select Priority Level</option>
-                    <option value="High">High</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Low">Low</option>
-                </select>
-                <!-- Task Consultant -->
-                <select id="inputConsultant" name="consultant">
-                    <option value="" selected hidden>Select Consultant</option>
-                    <option value="Client Partnerships Lead">Client Partnerships Lead</option>
-                    <option value="Corporate Social Responsibility Manager">Corporate Social Responsibility Manager
-                    </option>
-                    <option value="Customer Accounts Manager">Customer Accounts Manager</option>
-                    <option value="Customer Experience Administrator">Customer Experience Administrator</option>
-                    <option value="Accounts Clerk (Payable)">Accounts Clerk (Payable)</option>
-                    <option value="Administration Assistant">Administration Assistant</option>
-                    <option value="Complaint Resolution Team Leader">Complaint Resolution Team Leader</option>
-                    <option value="Business Development Manager">Business Development Manager</option>
-                    <option value="Call Centre Manager">Call Centre Manager</option>
-                    <option value="Chief Data Officer">Chief Data Officer</option>
-                </select>
-                <!-- Create Task Button -->
-                <button class="btn-add" type="button" id="btnAddTask">Create Task</button>
-            </div>
-        </div>
 
         <!-- Search Task List -->
         <div class="activity">
             <h3>Search for Task</h3>
             <p>Search for a task using key words: search by Task Name, Due Date, Priority Level, or Consultant.</p>
             <div class="task-search">
-                <input type="search" id="inputSearch" placeholder="Search tasks...">
-            <button class="btn-search" id="btnSearchTask">Search</button>
-            <button class="btn-clear-search" id="btnClearSearch">Clear Search</button>
+                <input class="element" type="search" id="inputSearch" placeholder="Search tasks...">
+                <button class="btn-search element" id="btnSearchTask">Search</button>
+                <button class="btn-clear-search element" id="btnClearSearch">Clear Search</button>
             </div>
         </div>
 
         <!-- Task List Table -->
-        <h3>Task List</h3>
+        <h1 class="centre">Task List</h1>
         <table>
             <thead>
                 <tr>
@@ -98,15 +62,51 @@
             <tbody id="taskListTableBody">
 
             </tbody>
-
-            <!-- <tfoot>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tfoot>-->
         </table>
+
+
+        <!-- User Input Table -->
+        <div class="activity">
+            <h3>Create New Task</h3>
+            <p>Please enter Task Name, Due Date, Priorty Level, and Consultant assigned in the provided
+                fields. Note: All fields are <b>required</b>, except for Consultant, which is <b>optional</b>.</p>
+            <div class="addTaskForm">
+                <!-- Task Name -->
+                <input class="element" id="inputTaskName" type="text" placeholder="Task name" required>
+                <!-- Task Due Date -->
+                <input class="element" id="inputDueDate" type="date" required>
+                <!-- Task Priority Level -->
+                <select class="element" id="inputPriority" name="priority" required>
+                    <option value="" selected hidden>Select Priority Level</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+                <!-- Task Consultant -->
+                <select class="element" id="inputConsultant" name="consultant">
+                    <option value="" selected hidden>Select Consultant (Optional)</option>
+                    <option value="Client Partnerships Lead">Client Partnerships Lead</option>
+                    <option value="Corporate Social Responsibility Manager">Corporate Social Responsibility Manager
+                    </option>
+                    <option value="Customer Accounts Manager">Customer Accounts Manager</option>
+                    <option value="Customer Experience Administrator">Customer Experience Administrator</option>
+                    <option value="Accounts Clerk (Payable)">Accounts Clerk (Payable)</option>
+                    <option value="Administration Assistant">Administration Assistant</option>
+                    <option value="Complaint Resolution Team Leader">Complaint Resolution Team Leader</option>
+                    <option value="Business Development Manager">Business Development Manager</option>
+                    <option value="Call Centre Manager">Call Centre Manager</option>
+                    <option value="Chief Data Officer">Chief Data Officer</option>
+                </select>
+                <!-- Create Task Button -->
+                <button class="btn-add element" type="button" id="btnAddTask">Create Task</button>
+                <button class="btn-clear-add element" type="button" id="btnClearAddTask">Clear</button>
+            </div>
+        </div>
+
+
+
+
+
 
 
 
@@ -141,8 +141,8 @@
         <div class="line line-one"></div>
     </div>
     <div class="external-links">
-        <a class="external-link" href="#">Privacy Policy</a>
-        <a class="external-link" href="#">Internet Usage Policy</a>
+        <a class="external-link" href="GE_Privacy-policy.pdf" target="_blank">Privacy Policy</a>
+        <a class="external-link" href="GE_Internet-usage-policy.pdf" target="_blank">Internet Usage Policy</a>
     </div>
 </footer>
 
