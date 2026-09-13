@@ -26,22 +26,25 @@ function deleteFunction(array, index) {
 }
 
 /**
- * Fuction for sequentially searching task list array for specific task using query
+ * Function for sequentially searching task list array for specific task using query
  * @param {Array} array - the current task list array
  * @param {string} query - string query being searched for within task list array
  * @returns {string} - query that was successfully located within array or -1 if not found
  */
 function sequentialSearchFunction(array, query) {
-    for (let i = 0; i < array.length; i++)
-        if (array[i] === query)
-            return query
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] === query) {
+            return query;
+        }
+    }
+    return -1;
 }
 
 /**
- * Fuction for sequentially searching task list array for specific task using taskName, dueDate, priority, or consultant
+ * Function for sequentially searching task list array for specific task using taskName, dueDate, priority, or consultant
  * @param {Array} array - the current task list array
  * @param {string} query - string query being searched for within task list array
- * @returns {number} - index position within array of query value or -1 if not found
+ * @returns {Array} - array containing the index positions of matching tasks (empty array if nothing found)
  */
 function sequentialTaskSearch(array, query) {
     let matches = [];
@@ -97,7 +100,7 @@ function getConsultant(arr, target) {
  * @returns {Array} - new roles array now sorted into alphabetical order (based on role)
  */
 function sortAscending(arr) {
-    return arr.slice().sort(function (a, b) { return a.role.localeCompare(b.role) })
+    return arr.slice().sort(function (a, b) { return a.role.localeCompare(b.role) });
 }
 
 /**
@@ -145,7 +148,7 @@ function updateDisplay(matches = null) {
         tdpriority.innerText = task.priority;
         tr.appendChild(tdpriority);
 
-        // Concultant Column
+        // Consultant Column
         let tdconsultant = document.createElement("td");
         tdconsultant.innerText = task.consultant;
         tr.appendChild(tdconsultant);
@@ -156,7 +159,6 @@ function updateDisplay(matches = null) {
         let btnDelete = document.createElement("button");
         btnDelete.innerText = "Delete";
         btnDelete.className = "badge-delete";
-        btnDelete.setAttribute("data-index", i);
         btnDelete.addEventListener("click", function () {
             if (confirm("Are you sure you want to delete this task?")) // https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_confirm
             {
@@ -169,7 +171,7 @@ function updateDisplay(matches = null) {
         let btnComplete = document.createElement("button");
         btnComplete.innerText = "Complete";
         btnComplete.className = "badge-complete";
-        btnComplete.setAttribute("data-index", i);
+        btnComplete.setAttribute("data-index", i); // What does this line do?
         btnComplete.addEventListener("click", function () {
             if (confirm("Are you sure you want to complete this task?"))
                 tr.classList.add("completed-task");

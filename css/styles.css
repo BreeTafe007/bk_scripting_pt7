@@ -21,6 +21,20 @@
     --secondary-color-light: #077A99;
 }
 
+
+/* Establish Classes */
+.centre {
+    text-align: center;
+}
+
+.element {
+    box-sizing: border-box;
+    height: 2.5rem;
+    padding: 8px;
+    font-size: 16px;
+}
+
+
 /* Body Styling for All Pages */
 body {
     margin: 0;
@@ -37,197 +51,7 @@ body {
 }
 
 
-
-/* td:last-child {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-} */
-
-td:last-child {
-    text-align: center;
-    white-space: nowrap;
-}
-
-td:last-child button {
-    margin: 0 5px;
-}
-
-
-.completed-task .badge-complete {
-    visibility: hidden;
-}
-
-
-.completed-task {
-    text-decoration: line-through;
-}
-
-
-.activity {
-    background-color: #f1f1f1;
-    border-left: 10px solid var(--secondary-color-light);
-    padding: 18px;
-    margin: 20px 0;
-    text-align: center;
-}
-
-
-/* TABLES */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-}
-
-th,
-td {
-    border: 1px solid var(--primary-color-dark);
-    padding: 11px;
-    background-color: whitesmoke;
-    text-align: left;
-    vertical-align: middle;
-}
-
-th {
-    background-color: var(--primary-color-light);
-    color: #262626;
-    text-align: center;
-    vertical-align: middle;
-}
-
-
-
-#inputultant,
-#inputPriority {
-    color: black;
-}
-
-#inputConsultant:has(option[value=""]:checked) {
-    color: grey;
-}
-
-#inputPriority:has(option[value=""]:checked) {
-    color: grey;
-}
-
-#inputConsultant option {
-    color: black;
-}
-
-#inputPriority option {
-    color: black;
-}
-
-
-/* BUTTONS & BADGES */
-.badge-delete {
-    display: inline-block;
-    background-color: #941a1d;
-    color: #ffffff;
-    border: none;
-    border-radius: 14px;
-    padding: 5px 12px;
-    font-size: 0.85rem;
-    cursor: pointer;
-    /* font-weight: bold; */
-}
-
-.badge-complete {
-    display: inline-block;
-    background-color: #0eac7c;
-    color: #ffffff;
-    border: none;
-    border-radius: 14px;
-    padding: 5px 12px;
-    font-size: 0.85rem;
-    cursor: pointer;
-    /* font-weight: bold; */
-}
-
-
-
-
-.index-main {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 30px;
-    /* align-items: stretch; */
-    flex: 1;
-    min-height: 0;
-}
-
-.index-instructions {
-    padding: 10px;
-    /* grid-column: 1; */
-}
-
-/* .index-images {
-    grid-column: 2;
-    display: flex;
-    flex-direction: column;
-    /* gap: 20px; */
-/* }  */
-
-
-
-.centre {
-    text-align: center;
-}
-
-.index-images {
-    overflow: hidden;
-    min-height: 0;
-    max-height: 1275px;
-}
-
-.image-scroll {
-    display: flex;
-    flex-direction: column;
-    /* gap: 20px; */
-    animation: scroll-images 110s linear infinite;
-}
-
-
-
-.welcome-img {
-    width: 100%;
-    /* min-width: 300px; */
-    height: auto;
-    display: block;
-}
-
-@keyframes scroll-images {
-    from {
-        transform: translateY(0);
-    }
-
-    to {
-        transform: translateY(-3000px);
-    }
-}
-
-
-
-
-
-
-.tasks-main {
-    flex: 1;
-    max-width: 1800px;
-    padding: 38px;
-    margin: 28px auto;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
-
-.contact-main {
-    flex: 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
-
+/* Header styling */
 header {
     background-color: whitesmoke;
     margin: 0;
@@ -288,6 +112,7 @@ ul {
     padding-right: 20px;
 }
 
+
 /* Footer Styling */
 footer {
     background-color: whitesmoke;
@@ -328,60 +153,215 @@ footer {
 }
 
 
+/* --- HOME PAGE --- */
+/* Styling of <main> on index page */
+.index-main {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    /* align-items: stretch; */
+    flex: 1;
+    min-height: 0;
+}
 
+.index-instructions {
+    padding: 10px;
+    /* grid-column: 1; */
+}
 
+/* Scrolling images for index page */
+.index-images {
+    overflow: hidden;
+    min-height: 0;
+    max-height: 1275px;
+}
 
+.image-scroll {
+    display: flex;
+    flex-direction: column;
+    animation: scroll-images 110s linear infinite;
+}
 
-#contact-img {
-
-    position: fixed;
-    width: 35%;
+.welcome-img {
+    width: 100%;
+    /* min-width: 300px; */
     height: auto;
+    display: block;
+}
 
-    top: 50%;
-    left: 75%;
+@keyframes scroll-images {
+    from {
+        transform: translateY(0);
+    }
 
-    transform: translate(-50%, -50%);
-
+    to {
+        transform: translateY(-3000px);
+    }
 }
 
 
+/* --- TASKS PAGE --- */
 
-
-.element {
-    box-sizing: border-box;
-    height: 2.5rem;
-    padding: 8px;
-    font-size: 16px;
+/* Styling for <main> on Tasks page */
+.tasks-main {
+    flex: 1;
+    max-width: 1800px;
+    padding: 38px;
+    margin: 28px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-/* #inputTaskName,
-#inputDueDate,
-#inputPriority,
+/* Styling for input sections (Add, Search) of Tasks page */
+.activity {
+    background-color: #f1f1f1;
+    border-left: 10px solid var(--secondary-color-light);
+    padding: 18px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.task-search,
+.addTaskForm {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Styling for input elements in Add Task section */
 #inputConsultant,
-#inputSearch,
-#btnAddTask,
-#btnSearchTask,
-#btnClearSearch {
-    box-sizing: border-box;
-    height: 2.5rem;
-    padding: 8px;
-    font-size: 16px;
-} */
+#inputPriority {
+    color: black;
+}
+
+#inputConsultant:has(option[value=""]:checked) {
+    color: grey;
+}
+
+#inputPriority:has(option[value=""]:checked) {
+    color: grey;
+}
+
+#inputConsultant option {
+    color: black;
+}
+
+#inputPriority option {
+    color: black;
+}
 
 button {
     border-radius: 1px;
     background-color: var(--accent-color-dark);
+    cursor: pointer;
 }
 
 
-/* Contact Form */
-.contact-form {
+/* Styling for Table on Tasks page */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
 
+th,
+td {
+    border: 1px solid var(--primary-color-dark);
+    padding: 11px;
+    background-color: whitesmoke;
+    text-align: left;
+    vertical-align: middle;
+}
+
+th {
+    background-color: var(--primary-color-light);
+    color: #262626;
+    text-align: center;
+    vertical-align: middle;
+}
+
+td:last-child {
+    text-align: center;
+    white-space: nowrap;
+}
+
+td:last-child button {
+    margin: 0 5px;
+}
+
+.completed-task .badge-complete {
+    visibility: hidden;
+}
+
+.completed-task {
+    text-decoration: line-through;
+}
+
+/* Delete and Complete Buttons in Task List table */
+.badge-delete {
+    display: inline-block;
+    background-color: #941a1d;
+    color: #ffffff;
+    border: none;
+    border-radius: 14px;
+    padding: 5px 12px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    /* font-weight: bold; */
+}
+
+.badge-complete {
+    display: inline-block;
+    background-color: #0eac7c;
+    color: #ffffff;
+    border: none;
+    border-radius: 14px;
+    padding: 5px 12px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    /* font-weight: bold; */
+}
+
+
+/* --- CONTACT PAGE --- */
+
+/* Styling for <main> on Contact page */
+/* .contact-main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+} */
+
+.contact-main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    padding: 40px 8%;
+    align-items: center;
+}
+
+/* Contact Form */
+.contact-section {
+    width: 100%;
+    max-width: 400px;
+    max-width: 40rem;
+    justify-self: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.contact-intro {
+    width: 80%;
+    padding: 0;
+    margin: auto;
+}
+
+.contact-form {
     width: 80%;
     max-width: 40rem;
     justify-self: center;
-    padding: 3rem 1rem;
+    margin: auto;
+    /* padding: 3rem 1rem; */
 }
 
 .contact-title {
@@ -407,6 +387,7 @@ button {
 
 .form-input,
 .form-textarea {
+    box-sizing: border-box;
     padding: 0.5rem;
     border: 1px solid whitesmoke;
     display: flex;
@@ -417,7 +398,6 @@ button {
     line-height: 1.25rem;
 }
 
-
 .form-textarea {
     min-height: 120px;
 }
@@ -425,16 +405,20 @@ button {
 .form-submit {
     display: block;
     width: 50%;
-    margin: 1.2rem auto 0;
+    margin: 1.2rem auto;
+}
 
-    background-color: var(--secondary-color-light);
-    color: whitesmoke;
-    padding: 13px 5px;
-    border-radius: 0.375rem;
+/* Contact Image */
+#contact-img {
+    width: 100%;
+    height: auto;
+    justify-self: center;
 }
 
 
-/* Responsive Behaviour of index page for Using Phone/Small screen */
+/* --- RESPONSIVE CSS --- */
+
+/* Responsive Behaviour of index page for Using Phone/small screen */
 @media screen and (max-width: 750px) {
 
     /* Remove the column-structure & swith to grid rows */
