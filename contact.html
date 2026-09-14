@@ -9,28 +9,40 @@
 </head>
 
 <body>
-
-  <header>
-
-    <nav>
+  <!-- Header -->
+  <div class="header-div">
+    <header>
+      <!-- Company Logo -->
       <div class="logo">
         <a href="index.html"><img id="header-logo" src="images/GE_Logo-inline-on-white.png"
             alt="Gelos Enterprises logo"></a>
       </div>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="tasks.html">Tasks</a></li>
-        <li><a class="active" href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
+      <!-- Webpage Title -->
+      <div class="header-title">
+        <h1><b>Task Manager</b></h1>
+      </div>
+      <!-- Navigation Links -->
+      <nav>
+        <ul>
+          <li><a class="active" href="index.html">Home</a></li>
+          <li><a href="tasks.html">Tasks</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+    <!-- Header Lines -->
     <div class="header-lines">
-      <!-- <div class="line line-one"></div> -->
       <div class="line line-one"></div>
       <div class="line line-two"></div>
     </div>
-  </header>
+  </div>
 
+  <!-- Main Section of Contact Page -->
   <main class="contact-main">
+
+    <!-- Contact Page Image -->
+    <img id="contact-img" src="images/AdobeStock_443550502.jpeg"
+      alt="Group of people having a meeting at an office table">
 
     <!-- Contact form adapted from Web3Forms Basic HTML Contact Form template: https://web3forms.com/templates/basic-html-contact-form -->
     <section class="contact-section">
@@ -42,7 +54,6 @@
       </div>
 
       <form class="contact-form" action="" method="POST">
-
         <div class="form-group-container">
           <div class="form-group">
             <label for="name" class="form-label">Name</label>
@@ -50,7 +61,8 @@
           </div>
           <div class="form-group">
             <label for="email" class="form-label">Email</label>
-            <input id="email" name="email" class="form-input" placeholder="kristina.kaiser@gelos.org" type="email" />
+            <input id="email" name="email" class="form-input" placeholder="kristina.kaiser@gelosmail.com.au"
+              type="email" />
           </div>
           <div class="form-group">
             <label for="phone" class="form-label">Phone</label>
@@ -63,14 +75,10 @@
         </div>
         <button class="form-submit element" type="submit">Submit</button>
       </form>
-
     </section>
-
-    <img id="contact-img" src="images/AdobeStock_443550502.jpeg"
-      alt="Group of people having a meeting at an office table">
-
   </main>
 
+  <!-- Footer -->
   <footer>
     <div class="footer-lines">
       <div class="line line-two"></div>
@@ -85,6 +93,7 @@
     </div>
   </footer>
 
+  <!-- Link to .js file -->
   <script src="js/script.js"></script>
 
 </body>
