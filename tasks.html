@@ -4,34 +4,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tasks | Gelos Enterprises</title>
+    <title>Tasks | Gelos Enterprises Task Manager</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
 
-    <header>
-        <nav>
-            <div class="logo">
-                <a href="index.html"><img id="header-logo" src="images/GE_Logo-inline-on-white.png"
-                        alt="Gelos Enterprises logo"></a>
-            </div>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a class="active" href="tasks.html">Tasks</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="header-lines">
-            <div class="line line-one"></div>
-            <div class="line line-two"></div>
-        </div>
-    </header>
+
+  <!-- Header -->
+  <header class="nav-wrapper">
+
+    <nav class="navbar">
+
+      <!-- Company Logo -->
+      <div class="logo">
+        <a href="index.html"><img id="header-logo" src="images/GE_Logo.png" alt="Gelos Enterprises logo"></a>
+      </div>
+
+      <!-- Webpage Title -->
+      <div class="header-title">
+        <h1><b>Task Manager</b></h1>
+      </div>
+
+      <!-- Hamburger Menu -->
+      <input type="checkbox" id="menu-toggle" class="menu-toggle">
+      <label for="menu-toggle" class="hamburger">
+        <span></span><span></span><span></span>
+      </label>
+      <!-- Navigation Links -->
+
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a class="active" href="tasks.html">Tasks</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Header Lines -->
+    <div class="header-lines">
+      <div class="line line-one"></div>
+      <div class="line line-two"></div>
+    </div>
+
+  </header>
 
     <main class="tasks-main">
-
         <!-- Search Task List -->
-        <div class="activity">
+        <!-- <div class="activity">
             <h3>Search for Task</h3>
             <p>Search for a task using key words: search by Task Name, Due Date, Priority Level, or Consultant.</p>
             <div class="task-search">
@@ -39,7 +59,21 @@
                 <button class="btn-search element" id="btnSearchTask">Search</button>
                 <button class="btn-clear-search element" id="btnClearSearch">Clear Search</button>
             </div>
-        </div>
+        </div> -->
+        <!-- I like the original styling using class="activity", but decided to switch to the card styling from the Grid Page Structure Demo.html document and apply this styling consistently across pages -->
+       
+       <!-- Search Task List Section -->
+        <section class="search-task-card card">
+            <h2>Search for Task</h2>
+            <p>Search for a task using key words: search by Task Name, Due Date, Priority Level, or Consultant.</p>
+            <div class="task-search">
+                <input class="element" type="search" id="inputSearch" placeholder="Search tasks...">
+                <button class="btn-search element" id="btnSearchTask">Search</button>
+                <button class="btn-clear-search element" id="btnClearSearch">Clear Search</button>
+            </div>
+        </section>
+
+
 
         <!-- Task List Table -->
         <h1 class="centre">Task List</h1>
@@ -57,8 +91,47 @@
         </table>
 
         <!-- Create New Task -->
-        <div class="activity">
+        <!-- <div class="activity">
             <h3>Create New Task</h3>
+            <p>Please enter Task Name, Due Date, Priority Level, and Consultant assigned in the provided
+                fields. Note: All fields are <b>required</b>, except for Consultant, which is <b>optional</b>.</p>
+            <div class="addTaskForm"> -->
+        <!-- Task Name -->
+        <!-- <input class="element" id="inputTaskName" type="text" placeholder="Task name" required> -->
+        <!-- Task Due Date -->
+        <!-- <input class="element" id="inputDueDate" type="date" required> -->
+        <!-- Task Priority Level -->
+        <!-- <select class="element" id="inputPriority" name="priority" required>
+                    <option value="" selected hidden>Select Priority Level</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select> -->
+        <!-- Task Consultant -->
+        <!-- <select class="element" id="inputConsultant" name="consultant">
+                    <option value="" selected hidden>Select Consultant (Optional)</option>
+                    <option value="Client Partnerships Lead">Client Partnerships Lead</option>
+                    <option value="Corporate Social Responsibility Manager">Corporate Social Responsibility Manager
+                    </option>
+                    <option value="Customer Accounts Manager">Customer Accounts Manager</option>
+                    <option value="Customer Experience Administrator">Customer Experience Administrator</option>
+                    <option value="Accounts Clerk (Payable)">Accounts Clerk (Payable)</option>
+                    <option value="Administration Assistant">Administration Assistant</option>
+                    <option value="Complaint Resolution Team Leader">Complaint Resolution Team Leader</option>
+                    <option value="Business Development Manager">Business Development Manager</option>
+                    <option value="Call Centre Manager">Call Centre Manager</option>
+                    <option value="Chief Data Officer">Chief Data Officer</option>
+                </select> -->
+        <!-- Create Task Button -->
+        <!-- <button class="btn-add element" type="button" id="btnAddTask">Create Task</button>
+                <button class="btn-clear-add element" type="button" id="btnClearAddTask">Clear</button>
+            </div>
+        </div> -->
+        <!-- I like the original styling using class="activity", but decided to switch to the card styling from the Grid Page Structure Demo.html document and apply this styling consistently across pages -->
+
+        <!-- Add New Task Section -->
+        <section class="add-task-card card">
+            <h2>Create New Task</h2>
             <p>Please enter Task Name, Due Date, Priority Level, and Consultant assigned in the provided
                 fields. Note: All fields are <b>required</b>, except for Consultant, which is <b>optional</b>.</p>
             <div class="addTaskForm">
@@ -92,24 +165,39 @@
                 <button class="btn-add element" type="button" id="btnAddTask">Create Task</button>
                 <button class="btn-clear-add element" type="button" id="btnClearAddTask">Clear</button>
             </div>
-        </div>
+        </section>
+
+
+
+
+
+
+
+
+
 
     </main>
 
-  <footer>
-    <div class="footer-lines">
-      <div class="line line-two"></div>
-      <div class="line line-one"></div>
-    </div>
-    <div class="footer-content">
-      <p>&copy; 2026 Gelos Enterprises. All rights reserved.</p>
-      <div class="external-links">
-        <a class="external-link" href="GE_Privacy-policy.pdf" target="_blank">Privacy Policy</a>
-        <a class="external-link" href="GE_Internet-usage-policy.pdf" target="_blank">Internet Usage Policy</a>
-      </div>
-    </div>
-  </footer>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-lines">
+            <div class="line line-two"></div>
+            <div class="line line-one"></div>
+        </div>
+        <div class="footer-content">
+            <p>&copy; 2026 Gelos Enterprises. All rights reserved.</p>
+            <div class="external-links">
+                <a class="external-link"
+                    href="https://share.tafensw.edu.au/share/file/5f1cec7b-1d03-446a-85b7-edb42692c34e/1/GE_Privacy-policy.pdf"
+                    target="_blank">Privacy Policy</a>
+                <a class="external-link"
+                    href="https://share.tafensw.edu.au/share/file/5f1cec7b-1d03-446a-85b7-edb42692c34e/1/GE_Internet-usage-policy.pdf"
+                    target="_blank">Internet Usage Policy</a>
+            </div>
+        </div>
+    </footer>
 
+    <!-- Link to JavaScript file -->
     <script src="js/script.js"></script>
 
 </body>

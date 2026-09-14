@@ -113,6 +113,21 @@ function updateDisplay(matches = null) {
 
     taskListTableBody.innerHTML = "";
 
+    // Check whether a search was performed and returned no matches
+    if (matches !== null && matches.length === 0) {
+        let tr = document.createElement("tr"); // Create table row
+        let td = document.createElement("td"); // Create table data (cell)
+
+        td.innerText = "No Tasks Found.";
+        td.colSpan = 5; // Span the td across all 5 th's
+
+        tr.appendChild(td);
+        taskListTableBody.appendChild(tr);
+
+        return;
+    }
+
+    // Check whether a search was performed and filter the tasks accordingly
     for (let i = 0; i < tasks.length; i++) {
 
         if (matches !== null) {
@@ -129,6 +144,10 @@ function updateDisplay(matches = null) {
             }
         }
 
+        // Populate the table with task details:
+        // - Populate the table with all tasks if no search was performed
+        // or
+        // - Populate the table with the matching tasks if a search was performed
         let task = tasks[i];
 
         let tr = document.createElement("tr");
@@ -196,6 +215,12 @@ let btnClearAddTask = document.getElementById("btnClearAddTask");
 let btnSearchTask = document.getElementById("btnSearchTask");
 let btnClearSearch = document.getElementById("btnClearSearch");
 let taskListTableBody = document.getElementById("taskListTableBody");
+let btnSubmit = document.getElementById("btnSubmit");
+let contactMessage = document.getElementById("contactMessage");
+let inputName = document.getElementById("name");
+let inputEmail = document.getElementById("email");
+let inputPhone = document.getElementById("phone");
+let inputMessage = document.getElementById("message");
 
 
 // ==========================================
@@ -292,494 +317,149 @@ updateDisplay();
 // ==========================================
 
 // Triggered when user clicks Add Task button
-btnAddTask.addEventListener("click", function () {
-    let taskName = inputTaskName.value.trim();
-    let dueDate = inputDueDate.value;
-    let priority = inputPriority.value;
+// Use IF - Only run task event listeners when the Task Manager page is loaded
+// because this JavaScript file is also used by other pages (contact.html)
+if (btnAddTask) {
+    btnAddTask.addEventListener("click", function () {
+        let taskName = inputTaskName.value.trim();
+        let dueDate = inputDueDate.value;
+        let priority = inputPriority.value;
 
 
-    if (!taskName || !dueDate || !priority) {
-        alert("Invalid input.");
-        return; // Return will exit the function: will not continue to the next process (let...)
-    }
+        if (!taskName || !dueDate || !priority) {
+            alert("Required fields cannot be left empty.");
+            return; // Return will exit the function: will not continue to the next process (let...)
+        }
 
-    let consultantRole = inputConsultant.value;
-    let consultant = "";
+        let consultantRole = inputConsultant.value;
+        let consultant = "";
 
-    if (consultantRole !== "") {
-        consultant = getConsultant(roles, consultantRole);
-    };
+        if (consultantRole !== "") {
+            consultant = getConsultant(roles, consultantRole);
+        };
 
-    let newTask = {
-        taskName: taskName,
-        dueDate: dueDate,
-        priority: priority,
-        consultant: consultant
-    };
-    insertFunction(tasks, 0, newTask);
+        let newTask = {
+            taskName: taskName,
+            dueDate: dueDate,
+            priority: priority,
+            consultant: consultant
+        };
+        insertFunction(tasks, 0, newTask);
 
-    // Reset default values to empty string
-    inputTaskName.value = "";
-    inputDueDate.value = "";
-    inputPriority.value = "";
-    inputConsultant.value = "";
+        // Reset default values to empty string
+        inputTaskName.value = "";
+        inputDueDate.value = "";
+        inputPriority.value = "";
+        inputConsultant.value = "";
 
-    // Update table
-    updateDisplay();
-})
-
-// Triggered when user clicks Search button
-btnSearchTask.addEventListener("click", function () {
-    let query = document.getElementById("inputSearch").value;
-
-    if (query === "") {
+        // Update table
         updateDisplay();
-    }
-    else {
-        let matches = sequentialTaskSearch(tasks, query);
-        updateDisplay(matches);
-    }
-})
+    })
 
-// Triggered when user clicks Clear Search button in Search for Task section
-btnClearSearch.addEventListener("click", function () {
-    document.getElementById("inputSearch").value = "";
+    // Triggered when user clicks Search button
+    btnSearchTask.addEventListener("click", function () {
+        let query = document.getElementById("inputSearch").value;
 
-    updateDisplay();
-})
+        if (query === "") {
+            updateDisplay();
+        }
+        else {
+            let matches = sequentialTaskSearch(tasks, query);
+            updateDisplay(matches);
+        }
+    })
 
-// Triggered when user clicks Clear button in Create New Task section
-btnClearAddTask.addEventListener("click", function () {
-    document.getElementById("inputTaskName").value = "";
-    document.getElementById("inputDueDate").value = "";
-    document.getElementById("inputPriority").value = "";
-    document.getElementById("inputConsultant").value = "";
-})
+    // Triggered when user clicks Clear Search button in Search for Task section
+    btnClearSearch.addEventListener("click", function () {
+        document.getElementById("inputSearch").value = "";
 
+        updateDisplay();
+    })
 
-
-
-
-
-
-
-
-// let roles = [
-//     {
-//         name: "Alice Johnson",
-//         role: "Accounts Clerk (Payable)"
-//     },
-//     {
-//         name: "Bob Johnson",
-//         role: "Accounts Clerk (Receivable)"
-//     },
-//     {
-//         name: "Carla Johnson",
-//         role: "Accounts Manager"
-//     },
-//     {
-//         name: "David Johnson",
-//         role: "Accounts Officer"
-//     },
-//     {
-//         name: "Emma Johnson",
-//         role: "Accounts Team Leader"
-//     },
-//     {
-//         name: "Frank Johnson",
-//         role: "Administration Assistant"
-//     },
-//     {
-//         name: "Grace Johnson",
-//         role: "Administration Manager"
-//     },
-//     {
-//         name: "Hank Johnson",
-//         role: "Administration Supervisor"
-//     },
-//     {
-//         name: "Ivy Johnson",
-//         role: "Brand Coordinator"
-//     },
-//     {
-//         name: "Jack Johnson",
-//         role: "Brand Manager"
-//     },
-//     {
-//         name: "Kelly Johnson",
-//         role: "Business Development Manager"
-//     },
-//     {
-//         name: "Liam Johnson",
-//         role: "Call Centre Manager"
-//     },
-//     {
-//         name: "Mia Johnson",
-//         role: "Call Centre Operator"
-//     },
-//     {
-//         name: "Noah Johnson",
-//         role: "Chief Data Officer"
-//     },
-//     {
-//         name: "Olivia Johnson",
-//         role: "Chief Executive Officer"
-//     },
-//     {
-//         name: "Paul Johnson",
-//         role: "Chief Technical Officer"
-//     },
-//     {
-//         name: "Quinn Johnson",
-//         role: "Chief of Operations"
-//     },
-//     {
-//         name: "Rachel Johnson",
-//         role: "Client Partnerships Lead"
-//     },
-//     {
-//         name: "Sam Johnson",
-//         role: "Complaint Resolution Team Leader"
-//     },
-//     {
-//         name: "Tina Johnson",
-//         role: "Corporate Social Responsibility Manager"
-//     },
-//     {
-//         name: "Uma Johnson",
-//         role: "Customer Accounts Manager"
-//     },
-//     {
-//         name: "Vince Johnson",
-//         role: "Customer Experience Administrator"
-//     },
-//     {
-//         name: "Wendy Johnson",
-//         role: "Customer Experience Data Manager"
-//     },
-//     {
-//         name: "Xavier Johnson",
-//         role: "Customer Experience Manager"
-//     },
-//     {
-//         name: "Yara Johnson",
-//         role: "Customer Insight Coordinator"
-//     },
-//     {
-//         name: "Zane Johnson",
-//         role: "Customer Service Officer"
-//     },
-//     {
-//         name: "Abby Jones",
-//         role: "Cyber Security Engineer"
-//     },
-//     {
-//         name: "Ben Jones",
-//         role: "Database Development Team Leader"
-//     },
-//     {
-//         name: "Clara Jones",
-//         role: "Digital Media Coordinator"
-//     },
-//     {
-//         name: "Derek Jones",
-//         role: "Employee Relations Advisor"
-//     },
-//     {
-//         name: "Ella Jones",
-//         role: "Employee Relations Officer"
-//     },
-//     {
-//         name: "Felix Jones",
-//         role: "Employee Relations Team Lead"
-//     },
-//     {
-//         name: "Gina Jones",
-//         role: "Employee Services Manager"
-//     },
-//     {
-//         name: "Harry Jones",
-//         role: "Employee Social Planner"
-//     },
-//     {
-//         name: "Iris Jones",
-//         role: "Engineering Consultant"
-//     },
-//     {
-//         name: "Jake Jones",
-//         role: "Financial Controller"
-//     },
-//     {
-//         name: "Kara Jones",
-//         role: "Finance Officer"
-//     },
-//     {
-//         name: "Leo Jones",
-//         role: "Financial Planner"
-//     },
-//     {
-//         name: "Maya Jones",
-//         role: "Head of Customer Service"
-//     },
-//     {
-//         name: "Nate Jones",
-//         role: "Head of Finance"
-//     },
-//     {
-//         name: "Opal Jones",
-//         role: "Head of Marketing"
-//     },
-//     {
-//         name: "Pete Jones",
-//         role: "Human Resources Advisor"
-//     },
-//     {
-//         name: "Quinn Jones",
-//         role: "Human Resources Analyst"
-//     },
-//     {
-//         name: "Ruby Jones",
-//         role: "Human Resources Consultant"
-//     },
-//     {
-//         name: "Sean Jones",
-//         role: "Human Resources Coordinator"
-//     },
-//     {
-//         name: "Tara Jones",
-//         role: "Human Resources Director"
-//     },
-//     {
-//         name: "Ulysses Jones",
-//         role: "Human Resources Information Systems Administrator"
-//     },
-//     {
-//         name: "Violet Jones",
-//         role: "Internal Audit Officer"
-//     },
-//     {
-//         name: "Will Jones",
-//         role: "Internal Relations Team Lead"
-//     },
-//     {
-//         name: "Xena Jones",
-//         role: "ICT Consultant"
-//     },
-//     {
-//         name: "Yuri Jones",
-//         role: "ICT Services Senior Manager"
-//     },
-//     {
-//         name: "Zoe Jones",
-//         role: "ICT Support Senior Manager"
-//     },
-//     {
-//         name: "Anna Brown",
-//         role: "ICT Network Senior Manager"
-//     },
-//     {
-//         name: "Bill Brown",
-//         role: "ICT Security Senior Manager"
-//     },
-//     {
-//         name: "Cara Brown",
-//         role: "Marketing and Communications Manager"
-//     },
-//     {
-//         name: "Dean Brown",
-//         role: "Marketing and Research Analyst"
-//     },
-//     {
-//         name: "Eva Brown",
-//         role: "Marketing and Research Coordinator"
-//     },
-//     {
-//         name: "Finn Brown",
-//         role: "Marketing Assistant"
-//     },
-//     {
-//         name: "Gwen Brown",
-//         role: "Marketing Consultant"
-//     },
-//     {
-//         name: "Hank Brown",
-//         role: "Marketing Coordinator"
-//     },
-//     {
-//         name: "Ivy Brown",
-//         role: "Marketing Manager"
-//     },
-//     {
-//         name: "Jake Brown",
-//         role: "Media Coordinator"
-//     },
-//     {
-//         name: "Kara Brown",
-//         role: "Media Planning Coordinator"
-//     },
-//     {
-//         name: "Liam Brown",
-//         role: "Organisational Development Coordinator"
-//     },
-//     {
-//         name: "Mia Brown",
-//         role: "Payroll Manager"
-//     },
-//     {
-//         name: "Noah Brown",
-//         role: "Payroll Officer"
-//     },
-//     {
-//         name: "Olivia Brown",
-//         role: "Portfolio Team Leader"
-//     },
-//     {
-//         name: "Paul Brown",
-//         role: "Procurement Manager"
-//     },
-//     {
-//         name: "Quinn Brown",
-//         role: "Procurement Officer"
-//     },
-//     {
-//         name: "Rachel Brown",
-//         role: "Product Development Coordinator"
-//     },
-//     {
-//         name: "Sam Brown",
-//         role: "Public Relations Lead"
-//     },
-//     {
-//         name: "Tina Brown",
-//         role: "Quality Assurance Officer"
-//     },
-//     {
-//         name: "Uma Brown",
-//         role: "Reception Manager"
-//     },
-//     {
-//         name: "Vince Brown",
-//         role: "Receptionist"
-//     },
-//     {
-//         name: "Wendy Brown",
-//         role: "Recruitment Advisor"
-//     },
-//     {
-//         name: "Xavier Brown",
-//         role: "Recruitment Coordinator"
-//     },
-//     {
-//         name: "Yara Brown",
-//         role: "Recruitment, Selection and Onboarding Administrator"
-//     },
-//     {
-//         name: "Zane Brown",
-//         role: "Research Officer"
-//     },
-//     {
-//         name: "Abby Smith",
-//         role: "Return To Work Coordinator"
-//     },
-//     {
-//         name: "Ben Smith",
-//         role: "Salary Administrator"
-//     },
-//     {
-//         name: "Clara Smith",
-//         role: "Service Desk Officer Level 1"
-//     },
-//     {
-//         name: "Derek Smith",
-//         role: "Social Media Lead"
-//     },
-//     {
-//         name: "Ella Smith",
-//         role: "Strategic Analyst"
-//     },
-//     {
-//         name: "Felix Smith",
-//         role: "Strategic Planning Manager"
-//     },
-//     {
-//         name: "Gina Smith",
-//         role: "Software Development Team Leader"
-//     },
-//     {
-//         name: "Harry Smith",
-//         role: "Security Administrator"
-//     },
-//     {
-//         name: "Iris Smith",
-//         role: "Security Manager"
-//     },
-//     {
-//         name: "Jake Smith",
-//         role: "Sustainability Officer"
-//     },
-//     {
-//         name: "Kara Smith",
-//         role: "Talent Acquisition Manager"
-//     },
-//     {
-//         name: "Leo Smith",
-//         role: "Telecommunication Technician"
-//     },
-//     {
-//         name: "Maya Smith",
-//         role: "Telecommunications Senior Manager"
-//     },
-//     {
-//         name: "Nate Smith",
-//         role: "Technical Support Officer Level 2"
-
-//     },
-//     {
-//         name: "Opal Smith",
-//         role: "Technical Support Specialist Level 3"
-//     },
-//     {
-//         name: "Pete Smith",
-//         role: "Taxation Manager"
-//     },
-//     {
-//         name: "Quinn Smith",
-//         role: "Taxation Officer"
-//     },
-//     {
-//         name: "Ruby Smith",
-//         role: "Training Advisor"
-//     },
-//     {
-//         name: "Sean Smith",
-//         role: "Training and Development Administrator"
-//     },
-//     {
-//         name: "Tara Smith",
-//         role: "Training and Development Manager"
-//     },
-//     {
-//         name: "Ulysses Smith",
-//         role: "Web Development Team Leader"
-//     },
-//     {
-//         name: "Violet Smith",
-//         role: "Work Health and Safety Administrator"
-//     },
-//     {
-//         name: "Will Smith",
-//         role: "Work Health and Safety Coordinator"
-//     },
-//     {
-//         name: "Xena Smith",
-//         role: "Work Health and Safety Manager"
-//     },
-//     {
-//         name: "Yuri Smithh",
-//         role: "Work Health and Safety Officer"
-//     }
-// ]
+    // Triggered when user clicks Clear button in Create New Task section
+    btnClearAddTask.addEventListener("click", function () {
+        document.getElementById("inputTaskName").value = "";
+        document.getElementById("inputDueDate").value = "";
+        document.getElementById("inputPriority").value = "";
+        document.getElementById("inputConsultant").value = "";
+    })
+}
 
 
+// Triggered when user clicks the Submit button in Contact Form
+// Use IF - Only run task event listeners when the Task Manager page is loaded
+// because this JavaScript file is also used by other pages (tasks.html)
+if (btnSubmit) {
+    btnSubmit.addEventListener("click", function () {
+        // Check whether Name field has been left empty
+        if (inputName.value.trim() === "") {
+            alert("Please enter your name.");
+            inputName.focus();
+            return;
+        }
 
+        // Check whether Email field has been left empty
+        if (inputEmail.value.trim() === "") {
+            alert("Please enter your email.");
+            inputEmail.focus();
+            return;
+        }
 
+        // If the Email field is not empty, check whether it contains an "@"
+        if (!inputEmail.value.includes("@")) {
+            alert("Please enter a valid email address.");
+            inputEmail.focus();
+            return;
+        }
+
+        // If the Email is not empty and contains an "@", check whether there is a string before and after the "@"
+        let email = inputEmail.value;
+        let atPosition = email.indexOf("@");
+
+        if (atPosition <= 0 || atPosition === email.length - 1) {
+            alert("Please enter a valid email address.");
+            inputEmail.focus();
+            return;
+        }
+
+        // Check whether Phone field has been left empty
+        if (inputPhone.value.trim() === "") {
+            alert("Please enter your phone number.");
+            inputPhone.focus();
+            return;
+        }
+
+        // If Phone field is not empty, check whether it is numeric
+        if (isNaN(inputPhone.value)) {
+            alert("Phone number must contain numbers only.");
+            inputPhone.focus();
+            return;
+        }
+        // If Phone field is not empty and is numeric, check whether it is exactly 10 digits
+        if (inputPhone.value.length !== 10) {
+            alert("Phone number must contain exactly 10 digits.");
+            inputPhone.focus();
+            return;
+        }
+
+        // Check whether Message field has been left empty
+        if (inputMessage.value.trim() === "") {
+            alert("Please enter a message.");
+            inputMessage.focus();
+            return;
+        }
+
+        // Display message if all fields have been validated
+        contactMessage.textContent = "Thank you, " + inputName.value +
+            ". We will be in contact with you as soon as possible.";
+
+        // Toggle message to visible
+        contactMessage.classList.add("message-visible");
+
+        // Clear all the input fields
+        inputName.value = "";
+        inputEmail.value = "";
+        inputPhone.value = "";
+        inputMessage.value = "";
+    })
+}
