@@ -30,14 +30,20 @@
       <label for="menu-toggle" class="hamburger">
         <span></span><span></span><span></span>
       </label>
-      <!-- Navigation Links -->
 
+
+      <!-- Navigation Links -->
       <ul class="nav-menu">
         <li><a href="index.html">Home</a></li>
         <li><a href="tasks.html">Tasks</a></li>
         <li><a class="active" href="contact.html">Contact</a></li>
       </ul>
+
     </nav>
+
+
+
+
 
     <!-- Header Lines -->
     <div class="header-lines">
@@ -99,13 +105,28 @@
   </main>
 
   <!-- Footer -->
-  <footer>
+  <footer id="pageFooter">
     <div class="footer-lines">
       <div class="line line-two"></div>
       <div class="line line-one"></div>
     </div>
+    <!-- Footer Content -->
     <div class="footer-content">
+
+      <!-- Copyright -->
       <p>&copy; 2026 Gelos Enterprises. All rights reserved.</p>
+
+      <!--  -->
+      <!-- TOGGLE BUTTON THAT TRIGGERS JAVASCRIPT -->
+      <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Dark Mode">
+        <span id="modeSwitch">Switch to Dark Mode</span>
+        <div class="switch-track">
+          <div class="switch-thumb"></div>
+        </div>
+      </button>
+
+
+      <!-- External Links -->
       <div class="external-links">
         <a class="external-link"
           href="https://share.tafensw.edu.au/share/file/5f1cec7b-1d03-446a-85b7-edb42692c34e/1/GE_Privacy-policy.pdf"
