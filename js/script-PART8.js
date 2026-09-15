@@ -197,7 +197,7 @@ function updateDisplay(matches = null) {
         let btnComplete = document.createElement("button");
         btnComplete.innerText = "Complete";
         btnComplete.className = "badge-complete";
-        btnComplete.setAttribute("data-index", i);
+        btnComplete.setAttribute("data-index", i); // What does this line do?
         btnComplete.addEventListener("click", function () {
             if (confirm("Are you sure you want to complete this task?")) {
                 tr.classList.add("completed-task");
@@ -208,6 +208,13 @@ function updateDisplay(matches = null) {
         tr.appendChild(tdActions);
         taskListTableBody.appendChild(tr);
     }
+}
+
+/**
+ * Function for toggling the theme between Light and Dark Mode
+ */
+function toggleTheme() {
+    document.body.classList.toggle("dark-mode");
 }
 
 
@@ -224,7 +231,12 @@ let btnClearAddTask = document.getElementById("btnClearAddTask");
 let btnSearchTask = document.getElementById("btnSearchTask");
 let btnClearSearch = document.getElementById("btnClearSearch");
 let taskListTableBody = document.getElementById("taskListTableBody");
-
+let btnSubmit = document.getElementById("btnSubmit");
+let contactMessage = document.getElementById("contactMessage");
+let inputName = document.getElementById("name");
+let inputEmail = document.getElementById("email");
+let inputPhone = document.getElementById("phone");
+let inputMessage = document.getElementById("message");
 
 // ==========================================
 //              DECLARE ARRAYS
@@ -394,21 +406,145 @@ if (btnAddTask) {
 }
 
 // Triggered when user clicks Search button
-btnSearchTask.addEventListener("click", function () {
-    let query = document.getElementById("inputSearch").value;
+// Use IF - Only run task event listeners when the Task Manager page is loaded
+// because this JavaScript file is also used by other pages (contact.html)
+if (btnSearchTask) {
+    btnSearchTask.addEventListener("click", function () {
+        let query = document.getElementById("inputSearch").value;
 
-    if (query === "") {
-        updateDisplay();
-    }
-    else {
-        let matches = sequentialTaskSearch(tasks, query);
-        updateDisplay(matches);
-    }
-})
+        if (query === "") {
+            updateDisplay();
+        }
+        else {
+            let matches = sequentialTaskSearch(tasks, query);
+            updateDisplay(matches);
+        }
+    })
+}
 
 // Triggered when user clicks Clear Search button in Search for Task section
-btnClearSearch.addEventListener("click", function () {
-    document.getElementById("inputSearch").value = "";
+// Use IF - Only run task event listeners when the Task Manager page is loaded
+// because this JavaScript file is also used by other pages (contact.html)
+if (btnClearSearch) {
+    btnClearSearch.addEventListener("click", function () {
+        document.getElementById("inputSearch").value = "";
 
-    updateDisplay();
-})
+        updateDisplay();
+    })
+}
+
+// Triggered when user clicks Clear button in Create New Task section
+// Use IF - Only run task event listeners when the Task Manager page is loaded
+// because this JavaScript file is also used by other pages (tasks.html)
+if (btnClearAddTask) {
+    btnClearAddTask.addEventListener("click", function () {
+        document.getElementById("inputTaskName").value = "";
+        document.getElementById("inputDueDate").value = "";
+        document.getElementById("inputPriority").value = "";
+        document.getElementById("inputConsultant").value = "";
+    })
+}
+
+// Triggered when user clicks the Submit button in Contact Form
+// Use IF - Only run task event listeners when the Task Manager page is loaded
+// because this JavaScript file is also used by other pages (tasks.html)
+if (btnSubmit) {
+    btnSubmit.addEventListener("click", function () {
+        // Check whether Name field has been left empty
+        if (inputName.value.trim() === "") {
+            alert("Please enter your name.");
+            inputName.focus();
+            return;
+        }
+
+        // Check whether Email field has been left empty
+        if (inputEmail.value.trim() === "") {
+            alert("Please enter your email.");
+            inputEmail.focus();
+            return;
+        }
+
+        // If the Email field is not empty, check whether it contains an "@"
+        if (!inputEmail.value.includes("@")) {
+            alert("Please enter a valid email address.");
+            inputEmail.focus();
+            return;
+        }
+
+        // If the Email is not empty and contains an "@", check whether there is a string before and after the "@"
+        let email = inputEmail.value;
+        let atPosition = email.indexOf("@");
+
+        if (atPosition <= 0 || atPosition === email.length - 1) {
+            alert("Please enter a valid email address.");
+            inputEmail.focus();
+            return;
+        }
+
+        // Check whether Phone field has been left empty
+        if (inputPhone.value.trim() === "") {
+            alert("Please enter your phone number.");
+            inputPhone.focus();
+            return;
+        }
+
+        // If Phone field is not empty, check whether it is numeric
+        if (isNaN(inputPhone.value)) {
+            alert("Phone number must contain numbers only.");
+            inputPhone.focus();
+            return;
+        }
+        // If Phone field is not empty and is numeric, check whether it is exactly 10 digits
+        if (inputPhone.value.length !== 10) {
+            alert("Phone number must contain exactly 10 digits.");
+            inputPhone.focus();
+            return;
+        }
+
+        // Check whether Message field has been left empty
+        if (inputMessage.value.trim() === "") {
+            alert("Please enter a message.");
+            inputMessage.focus();
+            return;
+        }
+
+        // Display message if all fields have been validated
+        contactMessage.textContent = "Thank you, " + inputName.value +
+            ". We will be in contact with you as soon as possible.";
+
+        // Toggle message to visible
+        contactMessage.classList.add("message-visible");
+
+        // Clear all the input fields
+        inputName.value = "";
+        inputEmail.value = "";
+        inputPhone.value = "";
+        inputMessage.value = "";
+    })
+}
+
+// Triggered when user toggles the dark/light mode switch in footer
+function toggleTheme() {
+    document.body.classList.toggle("dark-mode");
+
+    let modeSwitch = document.getElementById("modeSwitch");
+
+    if (document.body.classList.contains("dark-mode")) {
+        localStorage.setItem("theme", "dark");
+        modeSwitch.innerText = "Switch to Light Mode";
+    }
+    else {
+        localStorage.setItem("theme", "light");
+        modeSwitch.innerText = "Switch to Dark Mode";
+    }
+}
+
+// Remember the theme when navigating between pages -
+// theme doesn't change until user toggles the theme switch
+let savedTheme = localStorage.getItem("theme");
+
+if (savedTheme === "dark") {
+    document.body.classList.add("dark-mode");
+
+    document.getElementById("modeSwitch").innerText = "Switch to Light Mode";
+}
