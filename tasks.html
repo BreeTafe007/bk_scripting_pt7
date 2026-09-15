@@ -57,18 +57,18 @@
                 fields. Note: All fields are <b>required</b>, except for Consultant, which is <b>optional</b>.</p>
             <div class="addTaskForm">
                 <!-- Task Name -->
-                <input class="element" id="inputTaskName" type="text" placeholder="Task name" required>
+                <input class="element" id="inputTaskName" type="text" placeholder="Task name" required aria-label="Task Name">
                 <!-- Task Due Date -->
-                <input class="element" id="inputDueDate" type="date" required>
+                <input class="element" id="inputDueDate" type="date" required aria-label="Due Date">
                 <!-- Task Priority Level -->
-                <select class="element" id="inputPriority" name="priority" required>
+                <select class="element" id="inputPriority" name="priority" required aria-label="Priority">
                     <option value="" selected hidden>Select Priority Level</option>
                     <option value="High">High</option>
                     <option value="Medium">Medium</option>
                     <option value="Low">Low</option>
                 </select>
                 <!-- Task Consultant -->
-                <select class="element" id="inputConsultant" name="consultant">
+                <select class="element" id="inputConsultant" name="consultant" aria-label="Consultant">
                     <option value="" selected hidden>Select Consultant (Optional)</option>
                     <option value="Client Partnerships Lead">Client Partnerships Lead</option>
                     <option value="Corporate Social Responsibility Manager">Corporate Social Responsibility Manager
@@ -93,8 +93,8 @@
             <h2>Search for Task</h2>
             <p>Search for a task using key words: search by Task Name, Due Date, Priority Level, or Consultant.</p>
             <div class="task-search">
-                <input class="element" type="search" id="inputSearch" placeholder="Search tasks...">
-                <button class="btn-search element" id="btnSearchTask">Search</button>
+                <input class="element" type="search" id="inputSearch" placeholder="Search tasks..." aria-label="Search Tasks">
+                <button class="btn-search element" id="btnSearchTask" aria-label="Search Button">Search</button>
                 <button class="btn-clear-search element" id="btnClearSearch">Clear Search</button>
             </div>
         </section>
