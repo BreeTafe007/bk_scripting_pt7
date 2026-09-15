@@ -376,9 +376,7 @@ footer {
 
 .index-instructions {
     padding: 20px;
-    /* grid-column: 1; */
 }
-
 
 #btnGoToTasks {
     width: 100%;
@@ -389,7 +387,7 @@ footer {
 .index-images {
     overflow: hidden;
     min-height: 0;
-    max-height: 2050px;
+    max-height: 2155px;
 }
 
 .image-scroll {
@@ -400,7 +398,6 @@ footer {
 
 .welcome-img {
     width: 100%;
-    /* min-width: 300px; */
     height: auto;
     display: block;
 }
