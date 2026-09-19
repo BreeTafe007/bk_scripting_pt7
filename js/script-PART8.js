@@ -210,13 +210,6 @@ function updateDisplay(matches = null) {
     }
 }
 
-/**
- * Function for toggling the theme between Light and Dark Mode
- */
-function toggleTheme() {
-    document.body.classList.toggle("dark-mode");
-}
-
 
 // ==========================================
 //             DECLARE VARIABLES
@@ -397,46 +390,6 @@ if (btnAddTask) {
     })
 
     // Triggered when user clicks Clear button in Create New Task section
-    btnClearAddTask.addEventListener("click", function () {
-        document.getElementById("inputTaskName").value = "";
-        document.getElementById("inputDueDate").value = "";
-        document.getElementById("inputPriority").value = "";
-        document.getElementById("inputConsultant").value = "";
-    })
-}
-
-// Triggered when user clicks Search button
-// Use IF - Only run task event listeners when the Task Manager page is loaded
-// because this JavaScript file is also used by other pages (contact.html)
-if (btnSearchTask) {
-    btnSearchTask.addEventListener("click", function () {
-        let query = document.getElementById("inputSearch").value;
-
-        if (query === "") {
-            updateDisplay();
-        }
-        else {
-            let matches = sequentialTaskSearch(tasks, query);
-            updateDisplay(matches);
-        }
-    })
-}
-
-// Triggered when user clicks Clear Search button in Search for Task section
-// Use IF - Only run task event listeners when the Task Manager page is loaded
-// because this JavaScript file is also used by other pages (contact.html)
-if (btnClearSearch) {
-    btnClearSearch.addEventListener("click", function () {
-        document.getElementById("inputSearch").value = "";
-
-        updateDisplay();
-    })
-}
-
-// Triggered when user clicks Clear button in Create New Task section
-// Use IF - Only run task event listeners when the Task Manager page is loaded
-// because this JavaScript file is also used by other pages (tasks.html)
-if (btnClearAddTask) {
     btnClearAddTask.addEventListener("click", function () {
         document.getElementById("inputTaskName").value = "";
         document.getElementById("inputDueDate").value = "";

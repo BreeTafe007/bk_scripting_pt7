@@ -35,10 +35,32 @@
 }
 
 
-/* Body Styling for All Pages */
+/* Styling for All Pages */
+html,
 body {
+    height: 100%;
     margin: 0;
+    padding: 0;
+}
+
+#index-body {
+    overflow: hidden;
+    /* Stops full-page scrolling */
+}
+
+body {
     min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
     background-image:
         linear-gradient(rgba(255, 255, 255, 0.8),
             rgba(255, 255, 255, 0.8)),
@@ -46,9 +68,9 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
+    z-index: -1;
 }
+
 
 * {
     font-family: Georgia, Calibri, sans-serif;
@@ -58,9 +80,18 @@ p {
     line-height: 1.75;
 }
 
+
+
+
 /* Header styling */
 header {
     background-color: whitesmoke;
+    flex: 0 0 auto;
+    /* Prevents Edge from Collapsing header height */
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1000;
+    /* Keeps header above scrolling main content */
 }
 
 .header-title {
@@ -170,8 +201,9 @@ nav a:hover {
     left: 0;
     width: 100%;
     background: whitesmoke;
-    /* border-bottom: 2px solid var(--secondary-color-light); */
     padding: 10px;
+    z-index: 1001;
+    /* Places dropdown menu over header controls */
 }
 
 .nav-link {
@@ -198,7 +230,7 @@ nav a:hover {
 }
 
 /* Desktop Mode via Container Query */
-@container navbar (min-width: 600px) {
+@container navbar (min-width: 750px) {
     .hamburger {
         display: none;
     }
@@ -217,6 +249,11 @@ nav a:hover {
 /* Footer Styling */
 footer {
     background-color: whitesmoke;
+    flex: 0 0 auto;
+    /* Prevents Edge from compressing footer */
+    flex-shrink: 0;
+    /* Prevents footer from collapsing */
+    z-index: 100;
 }
 
 .footer-lines {
@@ -260,13 +297,22 @@ footer {
 .index-main {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    flex: 1;
+    flex: 1 1 0px;
+    /* 0px forces Edge to calculate exact height */
     min-height: 0;
+    /* Critical - Allows flex/grid children to shrink and scroll*/
+    height: 100%;
+    overflow: hidden;
 }
 
 .index-instructions {
     padding: 20px;
-    /* grid-column: 1; */
+    height: 100%;
+    overflow-y: auto;
+    /* Triggers scrollbar for left side content */
+    -webkit-overflow-scrolling: touch;
+    /* Smooth scrolling for WebKit / Edge / Chrome */
+    box-sizing: border-box;
 }
 
 #btnGoToTasks {
@@ -276,15 +322,15 @@ footer {
 
 /* Scrolling images for index page */
 .index-images {
+    height: 100%;
     overflow: hidden;
-    min-height: 0;
-    max-height: 2050px;
+    position: relative;
 }
 
 .image-scroll {
     display: flex;
     flex-direction: column;
-    animation: scroll-images 110s linear infinite;
+    animation: scroll-images 25s linear infinite;
 }
 
 .welcome-img {
@@ -292,6 +338,7 @@ footer {
     /* min-width: 300px; */
     height: auto;
     display: block;
+    flex-shrink: 0;
 }
 
 @keyframes scroll-images {
@@ -300,7 +347,7 @@ footer {
     }
 
     to {
-        transform: translateY(-3000px);
+        transform: translateY(-50%);
     }
 }
 
@@ -309,7 +356,7 @@ footer {
 
 /* Styling for <main> on Tasks page */
 .tasks-main {
-    flex: 1;
+    flex: 1 0 auto;
     max-width: 1800px;
     padding: clamp(15px, 3vw, 30px);
     /* padding: 38px; */
@@ -452,6 +499,7 @@ td:last-child button {
 /* --- CONTACT PAGE --- */
 
 /* Styling for <main> on Contact page */
+
 .contact-main {
     flex: 1;
     display: grid;
@@ -558,23 +606,34 @@ td:last-child button {
 
 /* --- RESPONSIVE CSS --- */
 
-/* Responsive Behaviour of index page for using phone/small screen */
+/* Responsive Behaviour for using phone/small screen */
 @media screen and (max-width: 750px) {
 
-    /* Remove the column-structure & swith to grid rows */
+    /* Responsive Behaviour of Index page for using phone/small screen */
+    /* Remove the column-structure & switch to grid rows */
     .index-main {
-
+        overflow: visible;
         grid-template-columns: 1fr;
         grid-template-rows: auto auto;
+        height: auto;
     }
 
+        #index-body {
+        overflow: auto;
+    }
+
+    #index-body main {
+        flex: none;
+    }
+    
     .index-images {
         grid-column: 1;
         grid-row: 2;
         overflow: hidden;
+        height: auto;
     }
 
-    .welcome-img {
+.welcome-img {
         width: 50vw;
         height: auto;
         flex-shrink: 0;
@@ -583,7 +642,7 @@ td:last-child button {
     /* Tell the images to scroll horizontally */
     .image-scroll {
         flex-direction: row;
-        animation: scroll-images-horizontal 50s linear infinite;
+        animation: scroll-images-horizontal 10s linear infinite;
     }
 
     @keyframes scroll-images-horizontal {
@@ -592,15 +651,12 @@ td:last-child button {
         }
 
         to {
-            transform: translateX(-3000px);
+            transform: translateX(-50%);
         }
     }
-}
 
 
-/* Responsive Behaviour of tasks page for using phone/small screen */
-@media screen and (max-width: 750px) {
-
+    /* Responsive Behaviour of Tasks page for using phone/small screen */
     .tasks-main {
         width: 100%;
         box-sizing: border-box;
@@ -645,10 +701,9 @@ td:last-child button {
     .task-search .btn-clear-search {
         width: 100%;
     }
-}
 
-/* Responsive Behaviour of contact page for using phone/small screen */
-@media screen and (max-width: 600px) {
+
+    /* Responsive Behaviour of Contact page for using phone/small screen */
     .contact-main {
         grid-template-columns: 1fr;
     }
@@ -659,5 +714,12 @@ td:last-child button {
 
     .contact-img-container {
         order: 2;
+    }
+
+
+    /* Responsive Behaviour of footer when using phone/small screen */
+    .footer-content {
+        flex-direction: column;
+        gap: 15px;
     }
 }

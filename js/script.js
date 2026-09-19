@@ -394,21 +394,25 @@ if (btnAddTask) {
 }
 
 // Triggered when user clicks Search button
-btnSearchTask.addEventListener("click", function () {
-    let query = document.getElementById("inputSearch").value;
+if (btnSearchTask) {
+    btnSearchTask.addEventListener("click", function () {
+        let query = document.getElementById("inputSearch").value;
 
-    if (query === "") {
-        updateDisplay();
-    }
-    else {
-        let matches = sequentialTaskSearch(tasks, query);
-        updateDisplay(matches);
-    }
-})
+        if (query === "") {
+            updateDisplay();
+        }
+        else {
+            let matches = sequentialTaskSearch(tasks, query);
+            updateDisplay(matches);
+        }
+    })
+}
 
 // Triggered when user clicks Clear Search button in Search for Task section
-btnClearSearch.addEventListener("click", function () {
-    document.getElementById("inputSearch").value = "";
+if (btnClearSearch) {
+    btnClearSearch.addEventListener("click", function () {
+        document.getElementById("inputSearch").value = "";
 
-    updateDisplay();
-})
+        updateDisplay();
+    })
+}

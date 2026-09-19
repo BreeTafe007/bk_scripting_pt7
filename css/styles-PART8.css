@@ -38,7 +38,7 @@
     /* Table */
     --table-text: #424754;
     --table-cell-bg: rgba(245, 245, 245, 0.75);
-    --table-header-bg: rgba(7, 122, 153, 0.5);
+    --table-header-bg: #ddab5e;
     --table-border: #424754;
 
 }
@@ -78,6 +78,18 @@ body.dark-mode {
             rgba(0, 0, 0, 0.8)),
         url("../images/AdobeStock_668218525.jpeg");
 }
+
+body.dark-mode::before {
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.7),
+            rgba(0, 0, 0, 0.7)
+        ),
+        url("../images/AdobeStock_668218525.jpeg");
+}
+
+
+
 
 /* TOGGLE BUTTON STYLING */
 .theme-toggle-btn {
@@ -142,8 +154,20 @@ body.dark-mode .switch-thumb {
 }
 
 
-/* Body Styling for All Pages */
+/* Styling for All Pages */
+html,
 body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#index-body {
+    overflow: hidden;
+    /* Stops full-page scrolling */
+}
+
+/* body {
     margin: 0;
     min-height: 100vh;
     background-color: var(--bg-color);
@@ -158,7 +182,34 @@ body {
     display: flex;
     flex-direction: column;
     transition: background-color 0.3s ease, color 0.3s ease;
+} */
+
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    color: var(--text-color);
 }
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.8),
+            rgba(255, 255, 255, 0.8)),
+        url("../images/AdobeStock_668218525.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+
 
 * {
     font-family: Georgia, Calibri, sans-serif;
@@ -171,10 +222,17 @@ p {
 
 /* Header styling */
 header {
-    /* background-color: var(--header-bg); */
     background-color: var(--header-bg);
     color: var(--header-text);
+    flex: 0 0 auto;
+    /* Prevents Edge from Collapsing header height */
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1000;
+    /* Keeps header above scrolling main content */
 }
+
+
 
 .header-title {
     font-size: clamp(0.5rem, 3vw, 1rem);
@@ -281,9 +339,11 @@ nav a:hover {
     left: 0;
     width: 100%;
     background: var(--header-bg);
-    padding: 10px;
-}
 
+    padding: 10px;
+    z-index: 1001;
+    /* Places dropdown menu over header controls */
+}
 
 .nav-link {
     display: block;
@@ -328,6 +388,11 @@ nav a:hover {
 /* Footer Styling */
 footer {
     background-color: var(--footer-bg);
+    flex: 0 0 auto;
+    /* Prevents Edge from compressing footer */
+    flex-shrink: 0;
+    /* Prevents footer from collapsing */
+    z-index: 100;
 }
 
 .footer-lines {
@@ -370,12 +435,22 @@ footer {
 .index-main {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    flex: 1;
+    flex: 1 1 0px;
+    /* 0px forces Edge to calculate exact height */
     min-height: 0;
+    /* Critical - Allows flex/grid children to shrink and scroll*/
+    height: 100%;
+    overflow: hidden;
 }
 
 .index-instructions {
     padding: 20px;
+    height: 100%;
+    overflow-y: auto;
+    /* Triggers scrollbar for left side content */
+    -webkit-overflow-scrolling: touch;
+    /* Smooth scrolling for WebKit / Edge / Chrome */
+    box-sizing: border-box;
 }
 
 #btnGoToTasks {
@@ -385,21 +460,22 @@ footer {
 
 /* Scrolling images for index page */
 .index-images {
+    height: 100%;
     overflow: hidden;
-    min-height: 0;
-    max-height: 2155px;
+    position: relative;
 }
 
 .image-scroll {
     display: flex;
     flex-direction: column;
-    animation: scroll-images 110s linear infinite;
+    animation: scroll-images 25s linear infinite;
 }
 
 .welcome-img {
     width: 100%;
     height: auto;
     display: block;
+    flex-shrink: 0;
 }
 
 @keyframes scroll-images {
@@ -408,7 +484,7 @@ footer {
     }
 
     to {
-        transform: translateY(-3000px);
+        transform: translateY(-50%);
     }
 }
 
@@ -660,20 +736,31 @@ td:last-child button {
 
 /* --- RESPONSIVE CSS --- */
 
-/* Responsive Behaviour of index page for using phone/small screen */
+/* Responsive Behaviour for using phone/small screen */
 @media screen and (max-width: 750px) {
 
+    /* Responsive Behaviour of Index page for using phone/small screen */
     /* Remove the column-structure & swith to grid rows */
     .index-main {
-
+        overflow: visible;
         grid-template-columns: 1fr;
         grid-template-rows: auto auto;
+        height: auto;
+    }
+
+    #index-body {
+        overflow: auto;
+    }
+
+    #index-body main {
+        flex: none;
     }
 
     .index-images {
         grid-column: 1;
         grid-row: 2;
         overflow: hidden;
+        height: auto;
     }
 
     .welcome-img {
@@ -685,7 +772,7 @@ td:last-child button {
     /* Tell the images to scroll horizontally */
     .image-scroll {
         flex-direction: row;
-        animation: scroll-images-horizontal 50s linear infinite;
+        animation: scroll-images-horizontal 20s linear infinite;
     }
 
     @keyframes scroll-images-horizontal {
@@ -694,14 +781,12 @@ td:last-child button {
         }
 
         to {
-            transform: translateX(-3000px);
+            transform: translateX(-50%);
         }
     }
-}
 
-/* Responsive Behaviour of tasks page for using phone/small screen */
-@media screen and (max-width: 750px) {
 
+    /* Responsive Behaviour of Tasks page for using phone/small screen */
     .tasks-main {
         width: 100%;
         box-sizing: border-box;
@@ -746,10 +831,9 @@ td:last-child button {
     .task-search .btn-clear-search {
         width: 100%;
     }
-}
 
-/* Responsive Behaviour of contact page for using phone/small screen */
-@media screen and (max-width: 600px) {
+
+    /* Responsive Behaviour of Contact page for using phone/small screen */
     .contact-main {
         grid-template-columns: 1fr;
     }
@@ -761,26 +845,9 @@ td:last-child button {
     .contact-img-container {
         order: 2;
     }
-}
-
-/* Responsive Behaviour of contact page for using phone/small screen */
-@media screen and (max-width: 600px) {
-    .contact-main {
-        grid-template-columns: 1fr;
-    }
-
-    .contact-form {
-        order: 1;
-    }
-
-    .contact-img-container {
-        order: 2;
-    }
-}
 
 
-/* Responsive Behaviour of footer when using phone/small screen */
-@media screen and (max-width: 600px) {
+    /* Responsive Behaviour of footer when using phone/small screen */
     .footer-content {
         flex-direction: column;
         gap: 15px;
