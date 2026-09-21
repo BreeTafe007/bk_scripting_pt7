@@ -5,7 +5,7 @@
 - **Role**: Vocational ICT Software Student
 
 ## Project Description
-The Gelos Task Manager is a responsive single-page web application designed to help administrative staff create, search, complete, and track operational tasks. The system features dynamic client-side array management, DOM manipulation, and local storage persistence.
+The Gelos Task Manager is a responsive web application designed to help administrative staff create, search, complete, and track operational tasks. The system features dynamic client-side array management, DOM manipulation, and local storage persistence.
 
 ## Website Pages & Modules
 - **Home (`index.html`)**: Landing overview page with system usage instructions.
@@ -17,7 +17,7 @@ The Gelos Task Manager is a responsive single-page web application designed to h
 - Real-time task searching/filtering.
 - Complete/Delete status toggles.
 - Dynamic array element removal (In-place array re-indexing).
-<!-- - Light / Dark theme preference toggling. -->
+- Light / Dark theme preference toggling.
 
 ## Technologies Used
 - **HTML5**: Semantic document structure and ARIA attributes.
@@ -38,12 +38,7 @@ The Gelos Task Manager is a responsive single-page web application designed to h
 ├── js/
 │   └── script.js
 │
-├── docs/
-│   ├── Test_Plan_Document.pdf
-│   └── jsdoc/
-│       ├── index.html
-│       ├── global.html
-│       └── script.js.html
+├── docs/    
 │  
 ├── images/
 │   ├── AdobeStock_251298381.jpeg
@@ -55,14 +50,8 @@ The Gelos Task Manager is a responsive single-page web application designed to h
 │   ├── AdobeStock_668218525.jpeg
 │   ├── AdobeStock_1178485938.jpeg
 │   └── GE_Logo-inline-on-white.png
-│
-├── external-docments/
-│   ├── GE_Internet-usage-policy.pdf
-│   └── GE_Privacy-policy.pdf
 │ 
-├── README.md
-│ 
-└── .gitignore
+└── README.md
 
 ## Setup & Running Instructions
 1. Clone or download the repository files to your local environment.
